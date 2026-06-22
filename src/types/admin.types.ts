@@ -18,3 +18,37 @@ export interface OtpPayload {
   email: string;
   otp: string;
 }
+// Chiffres clés affichés sur les cartes KPI
+export interface DashboardStats {
+  totalUsers: number;
+  totalTutors: number;
+  totalReservations: number;
+  totalRevenue: number;
+  pendingValidations: number;
+  activeSessionsToday: number;
+}
+
+// Un point de données pour le graphique mensuel
+export interface MonthlyData {
+  month: string;
+  reservations: number;
+  inscriptions: number;
+}
+
+// Une alerte de modération
+export interface ModerationAlert {
+  id: string;
+  type: 'signalement' | 'validation' | 'litige';
+  message: string;
+  date: string;
+  urgent: boolean;
+}
+
+// Une inscription récente
+export interface RecentRegistration {
+  id: string;
+  name: string;
+  role: 'ELEVE' | 'REPETITEUR';
+  date: string;
+  status: 'actif' | 'en_attente';
+}

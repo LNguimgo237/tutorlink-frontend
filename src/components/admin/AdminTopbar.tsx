@@ -1,7 +1,15 @@
-import { useAdminAuthStore } from '@/store/adminAuthStore';
+import { useAdminAuthStore } from '../../store/adminAuthStore';
+import { useNavigate } from 'react-router-dom';
 
 const AdminTopbar = () => {
   const { adminLogout } = useAdminAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    adminLogout();              // vide le store
+    navigate('/admin/login');   // redirige vers login
+  };
+
   return (
     <header style={{
       height: 60, background: '#1B4332', color: 'white',
@@ -11,7 +19,7 @@ const AdminTopbar = () => {
       <span style={{ fontWeight: 'bold', color: '#E9A319' }}>
         TutorLink — Admin
       </span>
-      <button onClick={adminLogout} style={{
+      <button onClick={handleLogout} style={{
         background: '#E9A319', border: 'none', borderRadius: 6,
         padding: '6px 16px', cursor: 'pointer', fontWeight: 'bold'
       }}>

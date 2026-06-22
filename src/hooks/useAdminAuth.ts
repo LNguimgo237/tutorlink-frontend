@@ -6,7 +6,6 @@ export const useAdminAuth = () => {
   const [isOtpStep, setIsOtpStep] = useState(false);
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
   const { setAdminAuth } = useAdminAuthStore();
   const navigate = useNavigate();
 
@@ -24,5 +23,5 @@ export const useAdminAuth = () => {
     }
   };
 
-  return { isOtpStep, error, loading, handleLogin, handleVerifyOtp };
+  return { isOtpStep, error, loading: false, handleLogin, handleVerifyOtp };
 };

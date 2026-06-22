@@ -9,7 +9,7 @@ const RegisterPage   = lazy(() => import('@/pages/auth/RegisterPage'));
 const SearchPage     = lazy(() => import('@/pages/search/SearchPage'));
 const NotFoundPage   = lazy(() => import('@/pages/NotFoundPage'));
 const AdminLoginPage = lazy(() => import('@/pages/admin/AdminLoginPage'));
-
+const AdminDashboardPage =lazy(()=> import('../pages/admin/AdminDashboardPage'));
 export const AppRouter = () => (
   <Suspense fallback={<div>Chargement...</div>}>
     <Routes>
@@ -21,10 +21,9 @@ export const AppRouter = () => (
 
       {/* Routes admin */}
       <Route path="/admin/login" element={<AdminLoginPage />} />
-      <Route element={<AdminProtectedRoute />}>
+      <Route element={<AdminProtectedRoute />}/>
         <Route element={<AdminLayout />}>
-          <Route path="/admin/dashboard" element={<div>Dashboard à venir</div>} />
-        </Route>
+          <Route path="/admin/dashboard" element={<div><AdminDashboardPage/></div>} />
       </Route>
 
       {/* 404 */}
