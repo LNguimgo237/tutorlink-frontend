@@ -11,6 +11,7 @@ const NotFoundPage   = lazy(() => import('@/pages/NotFoundPage'));
 const AdminLoginPage = lazy(() => import('@/pages/admin/AdminLoginPage'));
 const AdminDashboardPage =lazy(()=> import('../pages/admin/AdminDashboardPage'));
 const AdminUsersPage = lazy(() => import('../pages/admin/AdminUsersPage'));
+const AdminTutorsPage = lazy(() => import('../pages/admin/AdminTutorsPage'));
 
 export const AppRouter = () => (
   <Suspense fallback={<div>Chargement...</div>}>
@@ -27,6 +28,7 @@ export const AppRouter = () => (
         <Route element={<AdminLayout />}>
           <Route path="/admin/dashboard" element={<div><AdminDashboardPage/></div>} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
+          <Route path="/admin/tutors" element={<AdminTutorsPage />} />
       </Route>
 
       {/* 404 */}
