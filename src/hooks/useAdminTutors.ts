@@ -6,7 +6,7 @@ export const useAdminTutors = () => {
   // ── DONNÉES MOCK ── à remplacer par adminTutorService quand backend prêt
   const [pendingTutors, setPendingTutors] = useState<TutorValidationItem[]>([
     {
-      id: '1', name: 'Mme Fotso Aline', email: 'aline@gmail.com',
+      id: '1', name: 'Mme Sonna Dallya', email: 'aline@gmail.com',
       phone: '699334455', subject: 'Physique-Chimie', level: 'Lycée',
       quartier: 'Foto', rating: 0, totalSessions: 0,
       status: 'en_attente', submittedAt: '2026-06-20',
@@ -17,7 +17,7 @@ export const useAdminTutors = () => {
       ],
     },
     {
-      id: '2', name: 'M. Tagne Jules', email: 'jules@gmail.com',
+      id: '2', name: 'M. Nguefack yanick', email: 'jules@gmail.com',
       phone: '677445566', subject: 'Mathématiques', level: 'Terminale',
       quartier: 'Bafoussam Road', rating: 0, totalSessions: 0,
       status: 'en_attente', submittedAt: '2026-06-21',
