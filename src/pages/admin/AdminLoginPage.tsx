@@ -8,14 +8,14 @@ const AdminLoginPage = () => {
 
   return (
     <div style={{
-      minHeight: '100vh', background: '#1B4332',
+      minHeight: '100vh', background: '#1565C0',
       display: 'flex', alignItems: 'center', justifyContent: 'center'
     }}>
       <div style={{
         background: 'white', borderRadius: 12, padding: 40,
         width: 400, boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
       }}>
-        <h2 style={{ color: '#1B4332', textAlign: 'center', marginBottom: 8 }}>
+        <h2 style={{ color: '#1565C0', textAlign: 'center', marginBottom: 8 }}>
           🎓 TutorLink
         </h2>
         <p style={{ textAlign: 'center', color: '#666', marginBottom: 32 }}>
@@ -56,7 +56,7 @@ const inputStyle: React.CSSProperties = {
 };
 
 const btnStyle: React.CSSProperties = {
-  width: '100%', padding: 12, background: '#1B4332',
+  width: '100%', padding: 12, background: '#1565C0',
   color: 'white', border: 'none', borderRadius: 8,
   fontSize: 16, fontWeight: 'bold', cursor: 'pointer',
 };

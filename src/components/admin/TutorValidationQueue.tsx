@@ -24,9 +24,9 @@ const TutorValidationQueue = ({ tutors, onApprove, onReject, onViewDoc }: Props)
 
     {/* Liste des cartes ou message vide */}
     {tutors.length === 0 ? (
-      <div className="bg-green-50 border border-green-200
+      <div className="bg-blue-50 border border-green-200
                       rounded-xl p-8 text-center">
-        <p className="text-green-700 font-medium">
+        <p className="text-blue-700 font-medium">
           ✅ Aucun répétiteur en attente de validation
         </p>
       </div>

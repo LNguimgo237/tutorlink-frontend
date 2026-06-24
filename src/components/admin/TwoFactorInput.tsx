@@ -39,7 +39,7 @@ const TwoFactorInput = ({ onComplete }: Props) => {
           style={{
             width: 48, height: 56, textAlign: 'center',
             fontSize: 24, fontWeight: 'bold', borderRadius: 8,
-            border: '2px solid #1B4332', outline: 'none',
+            border: '2px solid #1565C0', outline: 'none',
           }}
         />
       ))}

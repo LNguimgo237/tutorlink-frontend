@@ -20,7 +20,7 @@ const UserDetailsModal = ({ user, onClose, onDelete }: Props) => (
     }}>
       {/* En-tête */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 24 }}>
-        <h3 style={{ color: '#1B4332', margin: 0 }}>Fiche utilisateur</h3>
+        <h3 style={{ color: '#1565C0', margin: 0 }}>Fiche utilisateur</h3>
         <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 20, cursor: 'pointer' }}>✖</button>
       </div>
 

@@ -16,7 +16,7 @@ const ReservationFilterBar = ({ filters, onChange }: Props) => (
       onChange={e => onChange({ ...filters, search: e.target.value })}
       className="border border-gray-200 rounded-lg px-3 py-2
                  text-sm flex-1 min-w-48 focus:outline-none
-                 focus:ring-2 focus:ring-green-300"
+                 focus:ring-2 focus:ring-blue-300"
     />
 
     {/* Filtre statut cours */}
@@ -24,7 +24,7 @@ const ReservationFilterBar = ({ filters, onChange }: Props) => (
       value={filters.courseStatus}
       onChange={e => onChange({ ...filters, courseStatus: e.target.value as ReservationFilters['courseStatus'] })}
       className="border border-gray-200 rounded-lg px-3 py-2
-                 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
     >
       <option value="TOUS">Tous les statuts cours</option>
       <option value="confirmee">Confirmée</option>
@@ -38,7 +38,7 @@ const ReservationFilterBar = ({ filters, onChange }: Props) => (
       value={filters.paymentStatus}
       onChange={e => onChange({ ...filters, paymentStatus: e.target.value as ReservationFilters['paymentStatus'] })}
       className="border border-gray-200 rounded-lg px-3 py-2
-                 text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
     >
       <option value="TOUS">Tous les paiements</option>
       <option value="paye_mtn">Payé MTN</option>
@@ -53,7 +53,7 @@ const ReservationFilterBar = ({ filters, onChange }: Props) => (
       value={filters.subject}
       onChange={e => onChange({ ...filters, subject: e.target.value })}
       className="border border-gray-200 rounded-lg px-3 py-2
-                 text-sm w-36 focus:outline-none focus:ring-2 focus:ring-green-300"
+                 text-sm w-36 focus:outline-none focus:ring-2 focus:ring-blue-300"
     />
 
     {/* Dates */}

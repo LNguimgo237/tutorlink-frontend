@@ -40,7 +40,7 @@ const TopRatedTutorsTable = ({ tutors }: Props) => (
             key={t.id}
             className={`border-t border-gray-50
               ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}
-              hover:bg-green-50 transition-colors`}
+              hover:bg-blue-50 transition-colors`}
           >
             <td className="px-5 py-3 font-medium text-gray-800">
               {t.name}

@@ -17,7 +17,7 @@ const UserActionsMenu = ({ user, onSuspend, onValidate, onDelete, onDetail }: Pr
 
     {/* Valider — uniquement si en attente */}
     {user.status === 'a_valider' && (
-      <button onClick={() => onValidate(user.id)} style={btnStyle('#1B4332')}>
+      <button onClick={() => onValidate(user.id)} style={btnStyle('#1565C0')}>
         ✅ Valider
       </button>
     )}

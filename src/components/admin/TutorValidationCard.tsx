@@ -29,7 +29,7 @@ const TutorValidationCard = ({ tutor, onApprove, onReject, onViewDoc }: Props) =
       {/* En-tête : photo + infos */}
       <div className="flex items-start gap-4">
         {/* Avatar initiales */}
-        <div className="w-14 h-14 rounded-full bg-green-800
+        <div className="w-14 h-14 rounded-full bg-blue-800
                         flex items-center justify-center
                         text-white font-bold text-lg flex-shrink-0">
           {tutor.name.charAt(0)}
@@ -42,7 +42,7 @@ const TutorValidationCard = ({ tutor, onApprove, onReject, onViewDoc }: Props) =
           </h3>
           <p className="text-sm text-gray-500">{tutor.email}</p>
           <div className="flex gap-2 mt-1 flex-wrap">
-            <span className="bg-green-100 text-green-800 text-xs
+            <span className="bg-blue-100 text-blue-800 text-xs
                              font-bold px-2 py-0.5 rounded-full">
               {tutor.subject}
             </span>
@@ -77,8 +77,8 @@ const TutorValidationCard = ({ tutor, onApprove, onReject, onViewDoc }: Props) =
               className="flex items-center gap-1 bg-gray-50
                          border border-gray-200 rounded-lg
                          px-3 py-1.5 text-xs font-medium
-                         text-gray-700 hover:bg-green-50
-                         hover:border-green-300 transition-colors
+                         text-gray-700 hover:bg-blue-50
+                         hover:border-blue-300 transition-colors
                          cursor-pointer"
             >
               {doc.type === 'CNI' ? '🪪' : doc.type === 'diplome' ? '📜' : '📷'}
@@ -93,7 +93,7 @@ const TutorValidationCard = ({ tutor, onApprove, onReject, onViewDoc }: Props) =
         <div className="flex gap-3">
           <button
             onClick={() => onApprove(tutor.id)}
-            className="flex-1 bg-green-700 hover:bg-green-800
+            className="flex-1 bg-blue-700 hover:bg-blue-800
                        text-white font-bold py-2 rounded-lg
                        transition-colors cursor-pointer"
           >

@@ -14,8 +14,8 @@ const AdminUsersPage = () => {
     <div>
       {/* En-tête avec compteur */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-        <h2 style={{ color: '#1B4332', margin: 0 }}>Gestion des utilisateurs</h2>
-        <span style={{ background: '#E8F5E9', color: '#1B4332', padding: '6px 16px', borderRadius: 20, fontWeight: 'bold' }}>
+        <h2 style={{ color: '#1565C0', margin: 0 }}>Gestion des utilisateurs</h2>
+        <span style={{ background: '#E8F5E9', color: '#1565C0', padding: '6px 16px', borderRadius: 20, fontWeight: 'bold' }}>
           {filteredUsers.length} utilisateur(s)
         </span>
       </div>

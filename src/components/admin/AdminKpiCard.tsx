@@ -25,7 +25,7 @@ const AdminKpiCard = ({ label, value, icon, accent, sub }: Props) => (
     {/* Texte */}
     <div>
       <div style={{ fontSize: 13, color: '#888', marginBottom: 4 }}>{label}</div>
-      <div style={{ fontSize: 26, fontWeight: 'bold', color: '#1B4332' }}>{value}</div>
+      <div style={{ fontSize: 26, fontWeight: 'bold', color: '#1565C0' }}>{value}</div>
       {sub && <div style={{ fontSize: 11, color: '#aaa', marginTop: 2 }}>{sub}</div>}
     </div>
   </div>

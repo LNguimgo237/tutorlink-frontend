@@ -15,7 +15,7 @@ const AdminTutorsPage = () => {
 
       {/* Titre de la page */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-green-900">
+        <h2 className="text-xl font-bold text-blue-900">
           Gestion des répétiteurs
         </h2>
         <span className="bg-orange-100 text-orange-700

@@ -16,12 +16,12 @@ const AdminDashboardPage = () => {
 
   return (
     <div>
-      <h2 style={{ color: '#1B4332', marginBottom: 24 }}>Vue d'ensemble</h2>
+      <h2 style={{ color: '#1565C0', marginBottom: 24 }}>Vue d'ensemble</h2>
 
       {/* Grille KPI — 3 cartes par ligne */}
       <div style={{ display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' }}>
         <AdminKpiCard label="Utilisateurs" value={stats.totalUsers.toLocaleString()} icon="👤" accent="#2196F3" />
-        <AdminKpiCard label="Répétiteurs" value={stats.totalTutors.toLocaleString()} icon="🎓" accent="#1B4332" />
+        <AdminKpiCard label="Répétiteurs" value={stats.totalTutors.toLocaleString()} icon="🎓" accent="#1565C0" />
         <AdminKpiCard label="Réservations" value={stats.totalReservations.toLocaleString()} icon="📅" accent="#E9A319" />
       </div>
       <div style={{ display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' }}>

@@ -15,7 +15,7 @@ const AdminReservationsPage = () => {
 
       {/* Titre + stats rapides */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-green-900">
+        <h2 className="text-xl font-bold text-blue-900">
           Gestion des réservations
         </h2>
         <span className="text-sm text-gray-500">
@@ -26,7 +26,7 @@ const AdminReservationsPage = () => {
       {/* Cartes statistiques rapides */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatCard label="Total" value={stats.total} color="bg-blue-50 text-blue-800" />
-        <StatCard label="Confirmées" value={stats.confirmees} color="bg-green-50 text-green-800" />
+        <StatCard label="Confirmées" value={stats.confirmees} color="bg-blue-50 text-blue-800" />
         <StatCard label="Terminées" value={stats.terminees} color="bg-gray-50 text-gray-700" />
         <StatCard
           label="Revenu total"

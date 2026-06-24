@@ -21,11 +21,11 @@ const links = [
 
 const AdminSidebar = () => (
   <aside style={{
-    width: 240, background: '#1B4332', color: 'white',
+    width: 240, background: '#1565C0', color: 'white',
     minHeight: '100vh', padding: '24px 0',
   }}>
     {/* Logo */}
-    <div style={{ padding: '0 20px 24px', borderBottom: '1px solid #2d5a45' }}>
+    <div style={{ padding: '0 20px 24px', borderBottom: '1px solid #1565C0' }}>
       <span style={{ color: '#E9A319', fontWeight: 'bold', fontSize: 18 }}>
         🎓 TutorLink
       </span>

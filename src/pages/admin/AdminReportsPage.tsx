@@ -17,7 +17,7 @@ const AdminReportsPage = () => {
 
       {/* Titre + bouton export */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-green-900">
+        <h2 className="text-xl font-bold text-blue-900">
           Rapports & Statistiques
         </h2>
         <span className="text-sm text-gray-400">
@@ -38,7 +38,7 @@ const AdminReportsPage = () => {
           label="Total réservations"
           value={stats.totalReservations.toLocaleString()}
           icon="📅"
-          accent="border-green-700"
+          accent="border-blue-700"
         />
         <ReportKpiCard
           label="Revenus totaux"

@@ -8,7 +8,7 @@ const ReservationsChart = ({ data }: Props) => (
     background: 'white', borderRadius: 10, padding: 24,
     boxShadow: '0 2px 8px rgba(0,0,0,0.07)',
   }}>
-    <h3 style={{ color: '#1B4332', marginBottom: 20, fontSize: 15 }}>
+    <h3 style={{ color: '#1565C0', marginBottom: 20, fontSize: 15 }}>
       📊 Activité des 6 derniers mois
     </h3>
     <ResponsiveContainer width="100%" height={220}>
@@ -17,7 +17,7 @@ const ReservationsChart = ({ data }: Props) => (
         <YAxis tick={{ fontSize: 12 }} />
         <Tooltip />
         <Legend />
-        <Bar dataKey="reservations" name="Réservations" fill="#1B4332" radius={[4,4,0,0]} />
+        <Bar dataKey="reservations" name="Réservations" fill="#1565C0" radius={[4,4,0,0]} />
         <Bar dataKey="inscriptions" name="Inscriptions" fill="#E9A319" radius={[4,4,0,0]} />
       </BarChart>
     </ResponsiveContainer>

@@ -12,7 +12,7 @@ const AdminTopbar = () => {
 
   return (
     <header style={{
-      height: 60, background: '#1B4332', color: 'white',
+      height: 60, background: '#1565C0', color: 'white',
       display: 'flex', alignItems: 'center',
       justifyContent: 'space-between', padding: '0 24px'
     }}>

@@ -10,7 +10,7 @@ interface Props {
 // Badge statut cours
 const courseConfig: Record<CourseStatus, { label: string; className: string }> = {
   confirmee: { label: 'Confirmée', className: 'bg-blue-100 text-blue-700' },
-  en_cours:  { label: 'En cours',  className: 'bg-green-100 text-green-700' },
+  en_cours:  { label: 'En cours',  className: 'bg-blue-100 text-blue-700' },
   terminee:  { label: 'Terminée',  className: 'bg-gray-100 text-gray-600' },
   annulee:   { label: 'Annulée',   className: 'bg-red-100 text-red-700' },
 };
@@ -19,7 +19,7 @@ const ReservationsTable = ({ reservations, onSelect, onComplete }: Props) => (
   <div className="bg-white rounded-xl shadow-sm overflow-hidden">
     <table className="w-full text-sm">
       <thead>
-        <tr className="bg-green-900 text-white text-xs uppercase">
+        <tr className="bg-blue-900 text-white text-xs uppercase">
           {['Réf.', 'Élève', 'Répétiteur', 'Matière', 'Date / Heure',
             'Montant', 'Cours', 'Paiement', 'Actions'].map(h => (
             <th key={h} className="text-left px-4 py-3 font-semibold">{h}</th>
@@ -38,7 +38,7 @@ const ReservationsTable = ({ reservations, onSelect, onComplete }: Props) => (
           return (
             <tr
               key={r.id}
-              className={`border-t border-gray-50 hover:bg-green-50
+              className={`border-t border-gray-50 hover:bg-blue-50
                 transition-colors
                 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}`}
             >
@@ -68,7 +68,7 @@ const ReservationsTable = ({ reservations, onSelect, onComplete }: Props) => (
               </td>
 
               {/* Montant */}
-              <td className="px-4 py-3 font-bold text-green-800">
+              <td className="px-4 py-3 font-bold text-blue-800">
                 {r.amount.toLocaleString()} F
               </td>
 
@@ -101,7 +101,7 @@ const ReservationsTable = ({ reservations, onSelect, onComplete }: Props) => (
                   {r.courseStatus === 'confirmee' && (
                     <button
                       onClick={() => onComplete(r.id)}
-                      className="bg-green-700 hover:bg-green-800 text-white
+                      className="bg-blue-700 hover:bg-blue-800 text-white
                                  text-xs font-bold px-2 py-1 rounded cursor-pointer"
                     >
                       ✅ Terminer

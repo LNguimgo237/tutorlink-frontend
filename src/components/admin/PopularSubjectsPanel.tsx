@@ -1,5 +1,5 @@
 const subjects = [
-  { name: 'Mathématiques', pct: 87, color: '#1B4332' },
+  { name: 'Mathématiques', pct: 87, color: '#1565C0' },
   { name: 'Physique-Chimie', pct: 72, color: '#E9A319' },
   { name: 'Anglais', pct: 65, color: '#2196F3' },
   { name: 'Français', pct: 54, color: '#9C27B0' },
@@ -11,7 +11,7 @@ const PopularSubjectsPanel = () => (
     background: 'white', borderRadius: 10, padding: 24,
     boxShadow: '0 2px 8px rgba(0,0,0,0.07)',
   }}>
-    <h3 style={{ color: '#1B4332', marginBottom: 20, fontSize: 15 }}>
+    <h3 style={{ color: '#1565C0', marginBottom: 20, fontSize: 15 }}>
       📚 Matières populaires
     </h3>
     {subjects.map(s => (

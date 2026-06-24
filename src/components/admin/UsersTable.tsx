@@ -11,7 +11,7 @@ interface Props {
 }
 
 const roleColor: Record<string, string> = {
-  ELEVE: '#2196F3', PARENT: '#9C27B0', REPETITEUR: '#1B4332',
+  ELEVE: '#2196F3', PARENT: '#9C27B0', REPETITEUR: '#1565C0',
 };
 
 const UsersTable = ({ users, onSuspend, onValidate, onDelete, onDetail }: Props) => (
@@ -21,7 +21,7 @@ const UsersTable = ({ users, onSuspend, onValidate, onDelete, onDetail }: Props)
   }}>
     <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
       <thead>
-        <tr style={{ background: '#1B4332', color: 'white' }}>
+        <tr style={{ background: '#1565C0', color: 'white' }}>
           {['Nom', 'Email', 'Téléphone', 'Rôle', 'Quartier', 'Statut', 'Actions'].map(h => (
             <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontWeight: 600 }}>{h}</th>
           ))}

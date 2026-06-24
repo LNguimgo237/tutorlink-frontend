@@ -7,7 +7,7 @@ const RecentRegistrationsTable = ({ data }: Props) => (
     background: 'white', borderRadius: 10, padding: 24,
     boxShadow: '0 2px 8px rgba(0,0,0,0.07)',
   }}>
-    <h3 style={{ color: '#1B4332', marginBottom: 16, fontSize: 15 }}>
+    <h3 style={{ color: '#1565C0', marginBottom: 16, fontSize: 15 }}>
       👥 Inscriptions récentes
     </h3>
     <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
@@ -23,7 +23,7 @@ const RecentRegistrationsTable = ({ data }: Props) => (
         {data.map(r => (
           <tr key={r.id} style={{ borderBottom: '1px solid #f5f5f5' }}>
             <td style={{ padding: '10px 0', fontWeight: 500 }}>{r.name}</td>
-            <td style={{ padding: '10px 0', color: r.role === 'REPETITEUR' ? '#1B4332' : '#2196F3' }}>
+            <td style={{ padding: '10px 0', color: r.role === 'REPETITEUR' ? '#1565C0' : '#2196F3' }}>
               {r.role}
             </td>
             <td style={{ padding: '10px 0', color: '#888' }}>{r.date}</td>

@@ -41,7 +41,7 @@ const SubjectPerformanceTable = ({ data }: Props) => (
             <td className="px-5 py-3 text-gray-600">
               {s.reservations.toLocaleString()}
             </td>
-            <td className="px-5 py-3 font-bold text-green-800">
+            <td className="px-5 py-3 font-bold text-blue-800">
               {s.revenus.toLocaleString()} F
             </td>
             <td className="px-5 py-3">
@@ -52,7 +52,7 @@ const SubjectPerformanceTable = ({ data }: Props) => (
               <div className="flex items-center gap-2">
                 <div className="flex-1 bg-gray-100 rounded-full h-2">
                   <div
-                    className="bg-green-700 h-2 rounded-full"
+                    className="bg-blue-700 h-2 rounded-full"
                     style={{ width: `${s.pct}%` }}
                   />
                 </div>

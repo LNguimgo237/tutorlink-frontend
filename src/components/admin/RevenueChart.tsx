@@ -22,7 +22,7 @@ const RevenueChart = ({ data }: Props) => (
         <Bar
           dataKey="reservations"
           name="Réservations"
-          fill="#1B4332"
+          fill="#1565C0"
           radius={[4, 4, 0, 0]}
         />
         <Bar
@@ -47,7 +47,7 @@ const RevenueChart = ({ data }: Props) => (
           type="monotone"
           dataKey="revenus"
           name="Revenus"
-          stroke="#1B4332"
+          stroke="#1565C0"
           strokeWidth={2}
           dot={{ fill: '#E9A319', r: 4 }}
         />

@@ -28,7 +28,7 @@ const ReportPeriodSelector = ({ filters, onChange, onExport }: Props) => (
           className={`px-4 py-2 rounded-lg text-sm font-medium
                       cursor-pointer transition-colors
                       ${filters.period === p.value
-                        ? 'bg-green-800 text-white'
+                        ? 'bg-blue-800 text-white'
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                       }`}
         >
@@ -45,7 +45,7 @@ const ReportPeriodSelector = ({ filters, onChange, onExport }: Props) => (
         value={filters.subject}
         onChange={e => onChange({ ...filters, subject: e.target.value })}
         className="border border-gray-200 rounded-lg px-3 py-2
-                   text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                   text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
       />
 
       {/* Filtre quartier */}
@@ -54,7 +54,7 @@ const ReportPeriodSelector = ({ filters, onChange, onExport }: Props) => (
         value={filters.quartier}
         onChange={e => onChange({ ...filters, quartier: e.target.value })}
         className="border border-gray-200 rounded-lg px-3 py-2
-                   text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                   text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
       />
 
       {/* Bouton export CSV */}

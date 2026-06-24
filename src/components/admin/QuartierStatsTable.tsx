@@ -29,7 +29,7 @@ const QuartierStatsTable = ({ data }: Props) => (
             <td className="px-5 py-3 text-gray-600">
               {q.reservations.toLocaleString()}
             </td>
-            <td className="px-5 py-3 font-bold text-green-800">
+            <td className="px-5 py-3 font-bold text-blue-800">
               {q.revenus.toLocaleString()} F
             </td>
             <td className="px-5 py-3">
