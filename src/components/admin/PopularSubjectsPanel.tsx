@@ -1,5 +1,5 @@
 const subjects = [
-  { name: 'Mathématiques', pct: 87, color: '#1565C0' },
+  { name: 'Mathématiques', pct: 87, color: '#1a2744' },
   { name: 'Physique-Chimie', pct: 72, color: '#E9A319' },
   { name: 'Anglais', pct: 65, color: '#2196F3' },
   { name: 'Français', pct: 54, color: '#9C27B0' },

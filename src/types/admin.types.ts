@@ -26,6 +26,7 @@ export interface DashboardStats {
   totalRevenue: number;
   pendingValidations: number;
   activeSessionsToday: number;
+  totalGroupes: number;
 }
 
 // Un point de données pour le graphique mensuel

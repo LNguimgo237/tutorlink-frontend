@@ -25,7 +25,7 @@ const ReservationDetailsDrawer = ({ reservation: r, onClose, onCancel }: Props) 
       className="bg-white w-full max-w-md h-full overflow-y-auto shadow-2xl flex flex-col"
     >
       {/* En-tête */}
-      <div className="bg-blue-900 text-white px-6 py-4 flex justify-between items-center">
+      <div className="bg-[#1a2744] text-white px-6 py-4 flex justify-between items-center">
         <div>
           <h3 className="font-bold text-lg">Détail réservation</h3>
           <p className="text-blue-300 text-sm">{r.reference}</p>

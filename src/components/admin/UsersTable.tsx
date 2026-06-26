@@ -1,19 +1,15 @@
 import { AdminUserItem } from '../../types/adminUser.types';
 import UserStatusBadge from './UserStatusBadge';
 import UserActionsMenu from './UserActionsMenu';
-
+            
 interface Props {
   users: AdminUserItem[];
   onSuspend: (id: string) => void;
-  onValidate: (id: string) => void;
   onDelete: (id: string) => void;
   onDetail: (user: AdminUserItem) => void;
 }
 
-const roleColor: Record<string, string> = {
-  ELEVE: '#2196F3', PARENT: '#9C27B0', REPETITEUR: '#1565C0',
-};
-
+const roleColor: Record<string, string> ={}
 const UsersTable = ({ users, onSuspend, onValidate, onDelete, onDetail }: Props) => (
   <div style={{
     background: 'white', borderRadius: 10,
@@ -21,7 +17,7 @@ const UsersTable = ({ users, onSuspend, onValidate, onDelete, onDetail }: Props)
   }}>
     <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
       <thead>
-        <tr style={{ background: '#1565C0', color: 'white' }}>
+        <tr style={{ background: '#1a2744', color: 'white' }}>
           {['Nom', 'Email', 'Téléphone', 'Rôle', 'Quartier', 'Statut', 'Actions'].map(h => (
             <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontWeight: 600 }}>{h}</th>
           ))}

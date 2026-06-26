@@ -8,20 +8,21 @@ const links = [
       { label: 'Vue d\'ensemble', path: '/admin/dashboard' },
       { label: 'Rapports & stats', path: '/admin/reports' },
     ]
-  },
+   },
   {
     group: 'Gestion',
     items: [
       { label: 'Utilisateurs', path: '/admin/users' },
       { label: 'Répétiteurs', path: '/admin/tutors' },
       { label: 'Réservations', path: '/admin/reservations' },
+      { label: 'Groupes', path: '/admin/groups' }
     ]
   },
 ];
 
 const AdminSidebar = () => (
   <aside style={{
-    width: 240, background: '#1565C0', color: 'white',
+    width: 240, background: '#1a2744', color: 'white',
     minHeight: '100vh', padding: '24px 0',
   }}>
     {/* Logo */}

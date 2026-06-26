@@ -12,6 +12,7 @@ export const useAdminStats = () => {
     totalRevenue: 9250,
     pendingValidations: 15,
     activeSessionsToday: 20,
+    totalGroupes:56,
   });
 
   const [monthlyData] = useState<MonthlyData[]>([

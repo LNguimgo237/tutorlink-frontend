@@ -21,8 +21,9 @@ const AdminDashboardPage = () => {
       {/* Grille KPI — 3 cartes par ligne */}
       <div style={{ display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' }}>
         <AdminKpiCard label="Utilisateurs" value={stats.totalUsers.toLocaleString()} icon="👤" accent="#2196F3" />
-        <AdminKpiCard label="Répétiteurs" value={stats.totalTutors.toLocaleString()} icon="🎓" accent="#1565C0" />
+        <AdminKpiCard label="Répétiteurs" value={stats.totalTutors.toLocaleString()} icon="🎓" accent="#1A2744" />
         <AdminKpiCard label="Réservations" value={stats.totalReservations.toLocaleString()} icon="📅" accent="#E9A319" />
+        <AdminKpiCard label='Groupes' value={stats.totalGroupes.toLocaleString()} icon= "👥 " accent='#E9A319' />
       </div>
       <div style={{ display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' }}>
         <AdminKpiCard label="Revenus (FCFA)" value={stats.totalRevenue.toLocaleString()} icon="💰" accent="#9C27B0" />

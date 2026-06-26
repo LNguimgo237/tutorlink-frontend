@@ -47,7 +47,7 @@ const RevenueChart = ({ data }: Props) => (
           type="monotone"
           dataKey="revenus"
           name="Revenus"
-          stroke="#1565C0"
+          stroke="#1A2744"
           strokeWidth={2}
           dot={{ fill: '#E9A319', r: 4 }}
         />

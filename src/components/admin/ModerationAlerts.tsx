@@ -11,7 +11,7 @@ const ModerationAlerts = ({ alerts }: Props) => (
     background: 'white', borderRadius: 10, padding: 24,
     boxShadow: '0 2px 8px rgba(0,0,0,0.07)',
   }}>
-    <h3 style={{ color: '#1565C0', marginBottom: 16, fontSize: 15 }}>
+    <h3 style={{ color: '#1a2744', marginBottom: 16, fontSize: 15 }}>
       🔔 Alertes de modération
     </h3>
     {alerts.map(a => (

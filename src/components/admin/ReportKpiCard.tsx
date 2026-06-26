@@ -19,7 +19,7 @@ const ReportKpiCard = ({ label, value, icon, accent, sub }: Props) => (
     {/* Texte */}
     <div>
       <p className="text-xs text-gray-500 mb-1">{label}</p>
-      <p className="text-2xl font-bold text-blue-900">{value}</p>
+      <p className="text-2xl font-bold bg-blue-50">{value}</p>
       {sub && <p className="text-xs text-gray-400 mt-0.5">{sub}</p>}
     </div>
   </div>
