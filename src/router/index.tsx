@@ -16,6 +16,7 @@ const AdminReservationsPage = lazy(() => import('../pages/admin/AdminReservation
 const AdminReportsPage = lazy(() => import('../pages/admin/AdminReportsPage'));
 const GroupsPage = lazy(() => import('../pages/groups/GroupsPage'));
 const GroupDetailPage = lazy(() => import('../pages/groups/GroupDetailPage'));
+const AdminGroupsPage = lazy(() => import('../pages/admin/AdminGroupsPage'));
 export const AppRouter = () => (
   <Suspense fallback={<div>Chargement...</div>}>
     <Routes>
@@ -35,6 +36,7 @@ export const AppRouter = () => (
           <Route path="/admin/tutors" element={<AdminTutorsPage />} />
           <Route path="/admin/reservations" element={<AdminReservationsPage />} />
           <Route path="/admin/reports" element={<AdminReportsPage />} />
+            <Route path="/admin/groups"       element={<AdminGroupsPage />} />  {/* ← ajoute */}
       </Route>
 
       {/* 404 */}
