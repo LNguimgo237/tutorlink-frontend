@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import AdminLayout from '@/layouts/AdminLayout';
 import AdminProtectedRoute from './AdminProtectedRoute';
+import StudentLayout from '../layouts/StudentLayout';
+import StudentProtectedRoute from './StudentProtectedRoute';
 
 const HomePage       = lazy(() => import('@/pages/home/HomePage'));
 const LoginPage      = lazy(() => import('@/pages/auth/LoginPage'));
@@ -14,6 +16,10 @@ const AdminUsersPage = lazy(() => import('../pages/admin/AdminUsersPage'));
 const AdminTutorsPage = lazy(() => import('../pages/admin/AdminTutorsPage'));
 const AdminReservationsPage = lazy(() => import('../pages/admin/AdminReservationsPage'));
 const AdminReportsPage = lazy(() => import('../pages/admin/AdminReportsPage'));
+const StudentDashboardPage = lazy(() => import('../pages/student/StudentDashboardPage'));
+const BookingPage = lazy(() => import('../pages/booking/BookingPage'));
+const MessagingPage = lazy(() => import('../pages/messaging/MessagingPage'));
+
 
 export const AppRouter = () => (
   <Suspense fallback={<div>Chargement...</div>}>
@@ -34,6 +40,15 @@ export const AppRouter = () => (
           <Route path="/admin/reservations" element={<AdminReservationsPage />} />
           <Route path="/admin/reports" element={<AdminReportsPage />} />
       </Route>
+      {/* student */}
+      <Route element={<StudentProtectedRoute />}>
+  <Route element={<StudentLayout />}>
+    <Route path="/dashboard" element={<StudentDashboardPage />} />
+    <Route path="/booking/:tutorId"        element={<BookingPage />} />
+<Route path="/reservation" element={<BookingPage />} />  
+<Route path="/messagerie" element={<MessagingPage />} />
+  </Route>
+  </Route>
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
