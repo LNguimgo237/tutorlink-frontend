@@ -2,6 +2,9 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import AdminLayout from '@/layouts/AdminLayout';
 import AdminProtectedRoute from './AdminProtectedRoute';
+import TutorLayout from '../layouts/TutorLayout';
+import TutorProtectedRoute from './TutorProtectedRoute';
+
 
 const HomePage       = lazy(() => import('@/pages/home/HomePage'));
 const LoginPage      = lazy(() => import('@/pages/auth/LoginPage'));
@@ -17,6 +20,10 @@ const AdminReportsPage = lazy(() => import('../pages/admin/AdminReportsPage'));
 const GroupsPage = lazy(() => import('../pages/groups/GroupsPage'));
 const GroupDetailPage = lazy(() => import('../pages/groups/GroupDetailPage'));
 const AdminGroupsPage = lazy(() => import('../pages/admin/AdminGroupsPage'));
+const TutorDashboardPage = lazy(() => import('../pages/tutor/TutorDashboardPage'));
+const TutorAvailabilityPage = lazy(() => import('../pages/tutor/TutorAvailabilityPage'));
+const TutorRequestsPage = lazy(() => import('../pages/tutor/TutorRequestsPage'));
+const TutorGroupsPage = lazy(()=> import('../pages/tutor/TutorGroupsPage'));
 export const AppRouter = () => (
   <Suspense fallback={<div>Chargement...</div>}>
     <Routes>
@@ -36,8 +43,15 @@ export const AppRouter = () => (
           <Route path="/admin/tutors" element={<AdminTutorsPage />} />
           <Route path="/admin/reservations" element={<AdminReservationsPage />} />
           <Route path="/admin/reports" element={<AdminReportsPage />} />
-            <Route path="/admin/groups"       element={<AdminGroupsPage />} />  {/* ← ajoute */}
-      </Route>
+            <Route path="/admin/groups"       element={<AdminGroupsPage />} /> 
+            </Route>
+            <Route element = {<TutorProtectedRoute />} />
+  <Route element={<TutorLayout />}>
+    <Route path="/repetiteur/dashboard" element={<TutorDashboardPage />} />
+    <Route path="/repetiteur/disponibilites" element={<TutorAvailabilityPage />} />
+    <Route path="/repetiteur/demandes" element={<TutorRequestsPage />} />
+    <Route path="/repetiteur/mes-groupes" element={<TutorGroupsPage />} />
+  </Route>
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
