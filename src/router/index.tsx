@@ -5,6 +5,8 @@ import AdminProtectedRoute from './AdminProtectedRoute';
 import TutorLayout from '../layouts/TutorLayout';
 import TutorProtectedRoute from './TutorProtectedRoute';
 
+import StudentLayout from '../layouts/StudentLayout';
+import StudentProtectedRoute from './StudentProtectedRoute';
 
 const HomePage       = lazy(() => import('@/pages/home/HomePage'));
 const LoginPage      = lazy(() => import('@/pages/auth/LoginPage'));
@@ -24,6 +26,11 @@ const TutorDashboardPage = lazy(() => import('../pages/tutor/TutorDashboardPage'
 const TutorAvailabilityPage = lazy(() => import('../pages/tutor/TutorAvailabilityPage'));
 const TutorRequestsPage = lazy(() => import('../pages/tutor/TutorRequestsPage'));
 const TutorGroupsPage = lazy(()=> import('../pages/tutor/TutorGroupsPage'));
+const StudentDashboardPage = lazy(() => import('../pages/student/StudentDashboardPage'));
+const BookingPage = lazy(() => import('../pages/booking/BookingPage'));
+const MessagingPage = lazy(() => import('../pages/messaging/MessagingPage'));
+
+
 export const AppRouter = () => (
   <Suspense fallback={<div>Chargement...</div>}>
     <Routes>
@@ -51,6 +58,15 @@ export const AppRouter = () => (
     <Route path="/repetiteur/disponibilites" element={<TutorAvailabilityPage />} />
     <Route path="/repetiteur/demandes" element={<TutorRequestsPage />} />
     <Route path="/repetiteur/mes-groupes" element={<TutorGroupsPage />} />
+      </Route>
+      {/* student */}
+      <Route element={<StudentProtectedRoute />}>
+  <Route element={<StudentLayout />}>
+    <Route path="/dashboard" element={<StudentDashboardPage />} />
+    <Route path="/booking/:tutorId"        element={<BookingPage />} />
+<Route path="/reservation" element={<BookingPage />} />  
+<Route path="/messagerie" element={<MessagingPage />} />
+  </Route>
   </Route>
 
       {/* 404 */}
