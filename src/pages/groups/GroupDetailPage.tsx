@@ -4,7 +4,7 @@ import GroupHeader from '../../components/groups/GroupHeader';
 import GroupSchedule from '../../components/groups/GroupSchedule';
 import GroupJoinPanel from '../../components/groups/GroupJoinPanel';
 import GroupReviews from '../../components/groups/GroupReviews';
-
+import PublicFooter from "../../components/public/layout/PublicFooter";
 const GroupDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const {
@@ -13,6 +13,7 @@ const GroupDetailPage = () => {
   } = useGroupDetail(id!);
 
   return (
+    <>
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-5xl mx-auto px-6 py-6">
 
@@ -94,6 +95,8 @@ const GroupDetailPage = () => {
         </div>
       </div>
     </div>
+    <PublicFooter/>
+    </>
   );
 };
 

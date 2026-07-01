@@ -1,11 +1,13 @@
 import { useGroups } from '../../hooks/useGroups';
 import GroupFilterBar from '../../components/groups/GroupFilterBar';
 import GroupCard from '../../components/groups/GroupCard';
+import PublicFooter from "../../components/public/layout/PublicFooter";
 
 const GroupsPage = () => {
   const { filteredGroups, filters, setFilters } = useGroups();
 
   return (
+    <>
     <div className="min-h-screen bg-gray-50">
       {/* En-tête */}
       <div className="bg-white border-b border-gray-100 px-6 py-8">
@@ -36,6 +38,8 @@ const GroupsPage = () => {
         )}
       </div>
     </div>
+<PublicFooter/>
+</>
   );
 };
 

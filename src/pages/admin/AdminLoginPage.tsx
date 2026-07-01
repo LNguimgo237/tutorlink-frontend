@@ -8,7 +8,7 @@ const AdminLoginPage = () => {
 
   return (
     <div style={{
-      minHeight: '100vh', background: '#1565C0',
+      minHeight: '100vh', background: '#1a2744',
       display: 'flex', alignItems: 'center', justifyContent: 'center'
     }}>
       <div style={{
@@ -56,7 +56,7 @@ const inputStyle: React.CSSProperties = {
 };
 
 const btnStyle: React.CSSProperties = {
-  width: '100%', padding: 12, background: '#1565C0',
+  width: '100%', padding: 12, background: '#1a2744',
   color: 'white', border: 'none', borderRadius: 8,
   fontSize: 16, fontWeight: 'bold', cursor: 'pointer',
 };
