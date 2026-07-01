@@ -1,21 +1,13 @@
-import { Routes, Route } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
-import ProtectedRoute from './ProtectedRoute';
+import { Routes, Route } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
 
-const HomePage    = lazy(() => import('@/pages/home/HomePage'));
-const LoginPage   = lazy(() => import('@/pages/auth/LoginPage'));
-const RegisterPage = lazy(() => import('@/pages/auth/RegisterPage'));
-const SearchPage  = lazy(() => import('@/pages/search/SearchPage'));
-const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
+const ReservationPage = lazy(() => import('@/routes/reservation/tutorld'))
 
 export const AppRouter = () => (
   <Suspense fallback={<div>Chargement...</div>}>
     <Routes>
-      <Route path="/"         element={<HomePage />} />
-      <Route path="/login"    element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/search"   element={<SearchPage />} />
-      <Route path="*"         element={<NotFoundPage />} />
+      <Route path="/reservation/:tutorId" element={<ReservationPage />} />
+      <Route path="*" element={<div style={{ textAlign: 'center', padding: 40 }}>Page non trouvée</div>} />
     </Routes>
   </Suspense>
-);
+)
