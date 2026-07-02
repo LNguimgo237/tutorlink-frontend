@@ -45,6 +45,9 @@ const TutorProfilePage = lazy(() => import('../pages/public/TutorProfilePage'));
 const UserLoginPage = lazy(() => import("../pages/public/UserLoginPage"));
 const UserRegisterPage = lazy(() => import('../pages/public/UserRegisterPage'));
 const SearchsPage = lazy(() => import("../pages/public/SearchsPage"));
+const BookingConfirmPage = lazy(
+  () => import("../pages/booking/BookingConfirmPage")
+);
 
 
 
@@ -64,6 +67,11 @@ export const AppRouter = () => (
       <Route path="/inscription" element={<UserRegisterPage />} />
       <Route path="/repetiteurs" element={<SearchsPage />} />
       <Route path="/" element={<HomePage />} />
+      <Route path="/reserver/:tutorId"        element={<BookingPage />} />
+      <Route
+  path="/booking/confirm/:bookingId"
+  element={<BookingConfirmPage />}
+/>
 
       {/* Routes admin */}
       <Route path="/admin/login" element={<AdminLoginPage />} />
@@ -92,7 +100,6 @@ export const AppRouter = () => (
       <Route element={<StudentProtectedRoute />}>
   <Route element={<StudentLayout />}>
     <Route path="/eleve/dashboard" element={<StudentDashboardPage />} />
-    <Route path="/booking/:tutorId"        element={<BookingPage />} />
     <Route path="/repetiteurs" element={<SearchTutorPage />} />
     <Route path="/mes-groupes" element={<StudentGroupsPage />} />
     <Route path="mes-reservations" element={<StudentReservationsPage />} />

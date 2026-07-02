@@ -5,7 +5,7 @@ const CTASection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="bg-[#1a2744] py-16 px-6">
+    <section className="bg-[#1555e1] py-16 px-6">
       <div className="max-w-3xl mx-auto text-center">
 
         {/* Titre */}

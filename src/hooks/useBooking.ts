@@ -10,7 +10,7 @@ export const useBooking = (tutorId?: string) => {
   // ── DONNÉES MOCK répétiteur ──
   const [tutor] = useState<BookingTutor>({
     id: tutorId || 't1',
-    name: 'M. Kamga Eric',
+    name: 'M. Kenfack Leo',
     subject: 'Mathématiques',
     level: 'Terminale C/D',
     quartier: 'Centre Dschang',
@@ -82,7 +82,7 @@ export const useBooking = (tutorId?: string) => {
 
       // Simulation succès → redirige vers dashboard
       setTimeout(() => {
-        navigate('/dashboard');
+        navigate('/booking/confirm/:bookingId');
       }, 1000);
     } catch {
       setError('Une erreur est survenue. Réessayez.');
