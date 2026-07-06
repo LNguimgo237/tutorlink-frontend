@@ -10,7 +10,7 @@ export const useAdminReservations = () => {
       eleve: { name: 'Paul leonel', email: 'paul@gmail.com', phone: '677001122' },
       repetiteur: { name: 'M. sonfack Eric', email: 'sonfack@gmail.com', subject: 'Mathématiques' },
       date: '2026-06-22', timeSlot: '14h00 - 16h00', duration: 2,
-      amount: 7000, courseStatus: 'terminee', paymentStatus: 'paye_mtn',
+      amount: 7000, courseStatus: 'terminee', 
       operator: 'MTN', transactionId: 'MTN-789456123',
       quartier: 'Centre', createdAt: '2026-06-20',
     },
@@ -19,7 +19,7 @@ export const useAdminReservations = () => {
       eleve: { name: 'Sophie Nguena', email: 'sophie@gmail.com', phone: '699112233' },
       repetiteur: { name: 'Mme Mambe Sylvie', email: 'tchana@gmail.com', subject: 'Physique-Chimie' },
       date: '2026-06-23', timeSlot: '10h00 - 12h00', duration: 2,
-      amount: 6000, courseStatus: 'confirmee', paymentStatus: 'paye_orange',
+      amount: 6000, courseStatus: 'confirmee', 
       operator: 'Orange', transactionId: 'ORG-456123789',
       quartier: 'Foto', createdAt: '2026-06-21',
     },
@@ -28,7 +28,7 @@ export const useAdminReservations = () => {
       eleve: { name: 'Marie Francine', email: 'marie@gmail.com', phone: '655778899' },
       repetiteur: { name: 'Mlle Tsafack Erica', email: 'erica@gmail.com', subject: 'Anglais' },
       date: '2026-06-24', timeSlot: '16h00 - 18h00', duration: 2,
-      amount: 5600, courseStatus: 'confirmee', paymentStatus: 'en_attente',
+      amount: 5600, courseStatus: 'confirmee', 
       operator: 'en_attente', quartier: 'Ngui', createdAt: '2026-06-22',
     },
     {
@@ -36,7 +36,7 @@ export const useAdminReservations = () => {
       eleve: { name: 'Lionel Nguims', email: 'lionel@gmail.com', phone: '683428312' },
       repetiteur: { name: 'M. Kamga Eric', email: 'kamga@gmail.com', subject: 'Mathématiques' },
       date: '2026-06-20', timeSlot: '08h00 - 10h00', duration: 2,
-      amount: 7000, courseStatus: 'annulee', paymentStatus: 'rembourse',
+      amount: 7000, courseStatus: 'annulee', 
       operator: 'MTN', transactionId: 'MTN-123456789',
       quartier: 'Centre', createdAt: '2026-06-18',
     },
@@ -44,7 +44,7 @@ export const useAdminReservations = () => {
 
   // Filtres actifs
   const [filters, setFilters] = useState<ReservationFilters>({
-    search: '', courseStatus: 'TOUS', paymentStatus: 'TOUS',
+    search: '', courseStatus: 'TOUS', 
     dateFrom: '', dateTo: '', subject: '',
   });
 

@@ -10,7 +10,7 @@ interface Props {
 }
 
 const roleColor: Record<string, string> ={}
-const UsersTable = ({ users, onSuspend, onValidate, onDelete, onDetail }: Props) => (
+const UsersTable = ({ users,  onDelete, onDetail }: Props) => (
   <div style={{
     background: 'white', borderRadius: 10,
     boxShadow: '0 2px 8px rgba(0,0,0,0.07)', overflow: 'hidden',
@@ -42,7 +42,7 @@ const UsersTable = ({ users, onSuspend, onValidate, onDelete, onDetail }: Props)
               <td style={{ padding: '12px 16px', color: '#555' }}>{u.quartier}</td>
               <td style={{ padding: '12px 16px' }}><UserStatusBadge status={u.status} /></td>
               <td style={{ padding: '12px 16px' }}>
-                <UserActionsMenu user={u} onSuspend={onSuspend} onValidate={onValidate} onDelete={onDelete} onDetail={onDetail} />
+                <UserActionsMenu user={u}  onDelete={onDelete} onDetail={onDetail} />
               </td>
             </tr>
           ))

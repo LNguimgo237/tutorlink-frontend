@@ -23,7 +23,7 @@ const UpcomingCoursesTable = ({ courses }: Props) => {
           📅 Prochains cours
         </h3>
         <button
-          onClick={() => navigate('/reserver')}
+          onClick={() => navigate('/reservation')}
           className="bg-[#1a2744] hover:bg-blue-900 text-white
                      text-xs font-bold px-3 py-1.5 rounded-lg
                      cursor-pointer transition-colors"

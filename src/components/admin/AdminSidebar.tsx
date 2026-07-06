@@ -7,6 +7,7 @@ const links = [
     items: [
       { label: 'Vue d\'ensemble', path: '/admin/dashboard' },
       { label: 'Rapports & stats', path: '/admin/reports' },
+      { label: 'Abonnements', path: '/admin/subscriptions' },
     ]
    },
   {

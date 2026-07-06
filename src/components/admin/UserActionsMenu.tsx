@@ -8,26 +8,13 @@ interface Props {
   onDetail: (user: AdminUserItem) => void;
 }
 
-const UserActionsMenu = ({ user, onSuspend, onValidate, onDelete, onDetail }: Props) => (
+const UserActionsMenu = ({ user, onDelete, onDetail }: Props) => (
   <div style={{ display: 'flex', gap: 6 }}>
     {/* Voir détails */}
     <button onClick={() => onDetail(user)} style={btnStyle('#2196F3')}>
       👁 Détail
     </button>
 
-    {/* Valider — uniquement si en attente */}
-    {user.status === 'a_valider' && (
-      <button onClick={() => onValidate(user.id)} style={btnStyle('#1565C0')}>
-        ✅ Valider
-      </button>
-    )}
-
-    {/* Suspendre — uniquement si actif */}
-    {user.status === 'actif' && (
-      <button onClick={() => onSuspend(user.id)} style={btnStyle('#E9A319')}>
-        ⏸ Suspendre
-      </button>
-    )}
 
     {/* Supprimer */}
     <button onClick={() => {

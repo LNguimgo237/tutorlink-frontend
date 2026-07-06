@@ -34,18 +34,13 @@ const ReservationFilterBar = ({ filters, onChange }: Props) => (
     </select>
 
     {/* Filtre statut paiement */}
-    <select
-      value={filters.paymentStatus}
-      onChange={e => onChange({ ...filters, paymentStatus: e.target.value as ReservationFilters['paymentStatus'] })}
-      className="border border-gray-200 rounded-lg px-3 py-2
-                 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
-    >
-      <option value="TOUS">Tous les paiements</option>
-      <option value="paye_mtn">Payé MTN</option>
-      <option value="paye_orange">Payé Orange</option>
-      <option value="en_attente">En attente</option>
-      <option value="rembourse">Remboursé</option>
-    </select>
+    
+     
+      <div className="border border-gray-200 rounded-lg px-3 py-2
+                 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">paiement: directement au repetiteur</div>
+                                      
+     
+    
 
     {/* Filtre matière */}
     <input
@@ -71,7 +66,7 @@ const ReservationFilterBar = ({ filters, onChange }: Props) => (
     {/* Réinitialiser */}
     <button
       onClick={() => onChange({
-        search: '', courseStatus: 'TOUS', paymentStatus: 'TOUS',
+        search: '', courseStatus: 'TOUS', 
         dateFrom: '', dateTo: '', subject: '',
       })}
       className="bg-gray-100 hover:bg-gray-200 text-gray-600

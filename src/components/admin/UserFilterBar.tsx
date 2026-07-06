@@ -35,8 +35,7 @@ const UserFilterBar = ({ filters, onChange }: Props) => (
       style={inputStyle}>
       <option value="TOUS">Tous les statuts</option>
       <option value="actif">Actif</option>
-      <option value="suspendu">Suspendu</option>
-      <option value="a_valider">À valider</option>
+      <option value="suprimer">Suspendu</option>
     </select>
 
     {/* Filtre par quartier */}

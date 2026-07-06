@@ -1,5 +1,4 @@
 import { AdminReservation } from '../../types/adminReservation.types';
-import PaymentStatusBadge from './PaymentStatusBadge';
 
 interface Props {
   reservation: AdminReservation;
@@ -79,7 +78,7 @@ const ReservationDetailsDrawer = ({ reservation: r, onClose, onCancel }: Props) 
         </section>
 
         {/* Paiement Mobile Money */}
-        <section>
+       {/* <section>
           <h4 className="text-xs font-bold text-gray-400 uppercase mb-2">
             💰 Paiement Mobile Money
           </h4>

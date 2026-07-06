@@ -10,13 +10,15 @@ interface Props {
 }
 
 const AdminGroupsTable = ({ groups, onVerify, onSuspend, onDelete, onDetail }: Props) => (
+  
   <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-    <table className="w-full text-sm">
+    <table className="w-full text-sm dark:bg-gray-800">
       <thead>
-        <tr className="bg-[#1a2744] text-white text-xs uppercase">
+        <tr className="bg-[#1a2744] dark:bg-gray-700 text-white text-xs uppercase">
           {['Nom du groupe', 'Matière / Niveau', 'Répétiteur',
-            'Places', 'Prix/mois', 'Revenus', 'Statut', 'Actions'].map(h => (
-            <th key={h} className="text-left px-4 py-3 font-semibold">{h}</th>
+            'Places', 'Prix/mois', 'Revenus', 'Statut', 'Actions'].map((h, i)=> (
+            <th key={h} className="text-left px-4 py-3 font-semibold ">{h}</th>
+            
           ))}
         </tr>
       </thead>

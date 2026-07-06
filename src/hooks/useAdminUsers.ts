@@ -35,18 +35,18 @@ export const useAdminUsers = () => {
   });
 
   // Suspend un utilisateur (mock)
-  const handleSuspend = (userId: string) => {
-    setUsers(prev => prev.map(u =>
-      u.id === userId ? { ...u, status: 'suspendu' } : u
-    ));
-  };
+  //const handleSuspend = (userId: string) => {
+    //setUsers(prev => prev.map(u =>
+      //u.id === userId ? { ...u, status: 'suspendu' } : u
+    //));
+  //};
 
   // Valide un utilisateur (mock)
-  const handleValidate = (userId: string) => {
-    setUsers(prev => prev.map(u =>
-      u.id === userId ? { ...u, status: 'actif' } : u
-    ));
-  };
+  //const handleValidate = (userId: string) => {
+    //setUsers(prev => prev.map(u =>
+     // u.id === userId ? { ...u, status: 'actif' } : u
+    //));
+ // };
 
   // Supprime un utilisateur (mock)
   const handleDelete = (userId: string) => {
@@ -57,6 +57,6 @@ export const useAdminUsers = () => {
   return {
     filteredUsers, filters, setFilters,
     selectedUser, setSelectedUser,
-    handleSuspend, handleValidate, handleDelete,
+     handleDelete,
   };
 };

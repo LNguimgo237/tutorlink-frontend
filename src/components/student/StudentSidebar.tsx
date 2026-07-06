@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 // Menu de navigation de l'espace élève
 const links = [
-  { label: '📊 Tableau de bord',   path: '/dashboard' },
+  { label: '📊 Tableau de bord',   path: '/eleve/dashboard' },
   { label: '🔍 Trouver un répétiteur', path: '/repetiteurs' },
   { label: '📅 Mes réservations',  path: '/mes-reservations' },
   { label: '👥 Mes groupes',       path: '/mes-groupes' },

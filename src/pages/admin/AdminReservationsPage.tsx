@@ -2,7 +2,7 @@ import { useAdminReservations } from '../../hooks/useAdminReservations';
 import ReservationFilterBar from '../../components/admin/ReservationFilterBar';
 import ReservationsTable from '../../components/admin/ReservationsTable';
 import ReservationDetailsDrawer from '../../components/admin/ReservationDetailsDrawer';
-
+import ReservationsChart from '../../components/admin/ReservationsChart';
 const AdminReservationsPage = () => {
   const {
     filtered, filters, setFilters, stats,
@@ -22,19 +22,27 @@ const AdminReservationsPage = () => {
           {filtered.length} résultat(s)
         </span>
       </div>
+      {/*statistique*/}
+<div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+     <StatCard
+  label="Total"
+  value={stats.total}
+  color="bg-blue-50 text-blue-700"
+/>
 
-      {/* Cartes statistiques rapides */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard label="Total" value={stats.total} color="bg-blue-50 text-blue-800" />
-        <StatCard label="Confirmées" value={stats.confirmees} color="bg-blue-50 text-blue-800" />
-        <StatCard label="Terminées" value={stats.terminees} color="bg-gray-50 text-gray-700" />
-        <StatCard
-          label="Revenu total"
-          value={`${stats.revenuTotal.toLocaleString()} F`}
-          color="bg-yellow-50 text-yellow-800"
-        />
-      </div>
+<StatCard
+  label="Confirmées"
+  value={stats.confirmees}
+  color="bg-blue-50 text-blue-700"
+/>
 
+<StatCard
+  label="Terminées"
+  value={stats.terminees}
+  color="bg-blue-50 text-blue-800"
+/>
+
+</div>
       {/* Barre de filtres */}
       <ReservationFilterBar filters={filters} onChange={setFilters} />
 

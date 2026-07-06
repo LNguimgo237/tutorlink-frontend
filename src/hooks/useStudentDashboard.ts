@@ -7,8 +7,6 @@ import {
 export const useStudentDashboard = () => {
   const [loading, setLoading] = useState(true);
 
-  // ── DONNÉES MOCK ── à remplacer par studentService quand backend prêt
-
   const [stats] = useState<StudentStats>({
     totalHours: 24,
     activeTutors: 3,
@@ -22,15 +20,15 @@ export const useStudentDashboard = () => {
       date: 'Lun. 23 juin',
       time: '16h – 18h',
       subject: 'Mathématiques',
-      tutorName: 'M. Nguimgo',
+      tutorName: 'M. Kamga Eric',
       status: 'confirme',
     },
     {
       id: '2',
-      date: 'Mer. 25 juin',
+      date: 'Mar. 25 juin',
       time: '17h – 19h',
       subject: 'Physique-Chimie',
-      tutorName: 'Mme Tchana Myster',
+      tutorName: 'Mme Tchana Sylvie',
       status: 'en_attente',
     },
     {
@@ -38,7 +36,7 @@ export const useStudentDashboard = () => {
       date: 'Ven. 27 juin',
       time: '15h – 17h',
       subject: 'Anglais',
-      tutorName: 'Mlle Kenfack Laressa',
+      tutorName: 'Mlle Fotso Aline',
       status: 'confirme',
     },
   ]);
@@ -48,7 +46,7 @@ export const useStudentDashboard = () => {
       id: '1',
       name: 'Maths BAC C/D · Groupe Élite',
       subject: 'Mathématiques',
-      tutorName: 'M. Nguene Brice',
+      tutorName: 'M. Kamga Eric',
       nextSession: 'Sam. 28 juin · 16h',
       monthlyPrice: 7000,
       paymentStatus: 'a_jour',
@@ -58,7 +56,7 @@ export const useStudentDashboard = () => {
       id: '2',
       name: 'English Club · Conversation',
       subject: 'Anglais',
-      tutorName: 'Mlle Fotso Mystelle',
+      tutorName: 'Mlle Fotso Aline',
       nextSession: 'Sam. 28 juin · 09h',
       monthlyPrice: 5000,
       paymentStatus: 'a_jour',
@@ -73,6 +71,8 @@ export const useStudentDashboard = () => {
     { subject: 'Français', score: 13, color: 'bg-yellow-400' },
   ]);
 
+  // ── ACTIVITÉ RÉCENTE MISE À JOUR ──
+  // Suppression des activités liées aux paiements individuels
   const [recentActivity] = useState<RecentActivity[]>([
     {
       id: '1',
@@ -88,12 +88,14 @@ export const useStudentDashboard = () => {
       time: 'hier',
       isNew: true,
     },
+    // ❌ SUPPRIMÉ : "Paiement reçu de 4 000 FCFA via MTN MoMo"
+    // → Les paiements individuels ne passent plus par la plateforme
     {
       id: '3',
-      icon: '💰',
-      message: 'Paiement reçu de 4 000 FCFA via MTN MoMo',
-      time: 'hier',
-      isNew: false,
+      icon: '👥',
+      message: 'Cotisation Groupe Élite — Juillet 2026 à renouveler',
+      time: 'dans 3 jours',
+      isNew: true,
     },
     {
       id: '4',
@@ -104,7 +106,6 @@ export const useStudentDashboard = () => {
     },
   ]);
 
-  // Simule un chargement
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(t);

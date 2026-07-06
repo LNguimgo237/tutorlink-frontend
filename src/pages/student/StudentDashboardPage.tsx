@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useStudentDashboard } from '../../hooks/useStudentDashboard';
 import StudentStatCard from '../../components/student/StudentStatCard';
 import UpcomingCoursesTable from '../../components/student/UpcomingCoursesTable';
@@ -6,6 +7,7 @@ import SubjectProgressPanel from '../../components/student/SubjectProgressPanel'
 import RecentActivityPanel from '../../components/student/RecentActivityPanel';
 
 const StudentDashboardPage = () => {
+  const navigate = useNavigate();
   const {
     loading, stats,
     upcomingCourses, myGroups,
@@ -28,6 +30,24 @@ const StudentDashboardPage = () => {
         </h2>
         <p className="text-gray-400 mt-1">
           Voici un aperçu de votre parcours scolaire ce mois-ci.
+        </p>
+      </div>
+
+      {/* ── BANNIÈRE INFO MODÈLE DE PAIEMENT ── */}
+      <div className="bg-blue-50 border border-blue-200
+                      rounded-xl px-4 py-3 flex gap-2 items-start">
+        <span className="text-blue-500 flex-shrink-0 mt-0.5">💡</span>
+        <p className="text-blue-700 text-xs leading-relaxed">
+          <strong>Rappel :</strong> Les cours individuels sont payés
+          directement à votre répétiteur via MTN MoMo ou Orange Money.
+          Contactez-le via la{' '}
+          <button
+            onClick={() => navigate('/messagerie')}
+            className="underline cursor-pointer font-bold"
+          >
+            messagerie
+          </button>{' '}
+          pour convenir du paiement.
         </p>
       </div>
 

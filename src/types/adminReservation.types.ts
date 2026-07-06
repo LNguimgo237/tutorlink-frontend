@@ -26,7 +26,7 @@ export interface AdminReservation {
   duration: number;           // en heures
   amount: number;             // montant en FCFA
   courseStatus: CourseStatus;
-  paymentStatus: PaymentStatus;
+  //paymentStatus: PaymentStatus;
   operator: MobileMoneyOperator;
   transactionId?: string;     // ID transaction Mobile Money
   quartier: string;
@@ -38,7 +38,7 @@ export interface AdminReservation {
 export interface ReservationFilters {
   search: string;
   courseStatus: CourseStatus | 'TOUS';
-  paymentStatus: PaymentStatus | 'TOUS';
+  //paymentStatus: PaymentStatus | 'TOUS';
   dateFrom: string;
   dateTo: string;
   subject: string;

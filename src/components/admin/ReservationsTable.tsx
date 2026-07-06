@@ -21,7 +21,7 @@ const ReservationsTable = ({ reservations, onSelect, onComplete }: Props) => (
       <thead>
         <tr className="bg-[#1a2744] text-white text-xs uppercase">
           {['Réf.', 'Élève', 'Répétiteur', 'Matière', 'Date / Heure',
-            'Montant', 'Cours', 'Paiement', 'Actions'].map(h => (
+             'Cours', 'Actions'].map(h => (
             <th key={h} className="text-left px-4 py-3 font-semibold">{h}</th>
           ))}
         </tr>
@@ -68,7 +68,7 @@ const ReservationsTable = ({ reservations, onSelect, onComplete }: Props) => (
               </td>
 
               {/* Montant */}
-              <td className="px-4 py-3 font-bold text-blue-800">
+              {/*<td className="px-4 py-3 font-bold text-blue-800">
                 {r.amount.toLocaleString()} F
               </td>
 
@@ -81,7 +81,7 @@ const ReservationsTable = ({ reservations, onSelect, onComplete }: Props) => (
               </td>
 
               {/* Statut paiement */}
-              <td className="px-4 py-3">
+             {/* <td className="px-4 py-3">
                 <PaymentStatusBadge status={r.paymentStatus} />
               </td>
 

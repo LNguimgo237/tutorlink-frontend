@@ -7,7 +7,7 @@ const AdminUsersPage = () => {
   const {
     filteredUsers, filters, setFilters,
     selectedUser, setSelectedUser,
-    handleSuspend, handleValidate, handleDelete,
+   handleDelete,
   } = useAdminUsers();
 
   return (
@@ -26,8 +26,6 @@ const AdminUsersPage = () => {
       {/* Tableau */}
       <UsersTable
         users={filteredUsers}
-        onSuspend={handleSuspend}
-        onValidate={handleValidate}
         onDelete={handleDelete}
         onDetail={setSelectedUser}
       />

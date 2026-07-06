@@ -7,6 +7,7 @@
 //   POST /api/auth/logout → bouton Déconnexion
 
 import { useState, type ReactNode } from "react";
+import ThemeToggle from '../shared/ThemeToggle';
 
 // BACK-END : remplacer par les données de l'utilisateur connecté via Context/API
 const MOCK_USER = {
@@ -101,6 +102,7 @@ export default function RepetiteurLayout({ children, pageActive }: Props) {
         {/* Topbar */}
         <header className="bg-[#1a2b4a] h-14 flex items-center justify-between px-5 sticky top-0 z-30 shadow-md">
           {/* Bouton burger (mobile uniquement) */}
+          <ThemeToggle />
           <button
             className="lg:hidden text-white text-xl leading-none"
             onClick={() => setOuvert(!ouvert)}

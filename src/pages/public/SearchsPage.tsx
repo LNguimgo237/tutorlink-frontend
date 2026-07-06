@@ -68,7 +68,7 @@ const SearchPage: React.FC = () => {
               Groupes
             </Link>
             <Link
-              to="/comment-ca-marche"
+              to="/#comment-ca-marche"
               className="text-white/80 hover:text-white text-sm transition-colors"
             >
               Comment ça marche

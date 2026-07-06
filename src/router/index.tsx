@@ -48,7 +48,13 @@ const SearchsPage = lazy(() => import("../pages/public/SearchsPage"));
 const BookingConfirmPage = lazy(
   () => import("../pages/booking/BookingConfirmPage")
 );
-
+const TutorSubscriptionPage = lazy(() => import('../pages/tutor/TutorSubscriptionPage'));
+const AdminSubscriptionsPage = lazy(
+  () => import('../pages/admin/AdminSubscriptionsPage')
+);
+const TutorGroupSubscriptionPage = lazy(
+  () => import('../pages/tutor/TutorGroupSubscriptionPage')
+);
 
 
 
@@ -83,6 +89,7 @@ export const AppRouter = () => (
           <Route path="/admin/reservations" element={<AdminReservationsPage />} />
           <Route path="/admin/reports" element={<AdminReportsPage />} />
             <Route path="/admin/groups"       element={<AdminGroupsPage />} /> 
+            <Route path="/admin/subscriptions" element={<AdminSubscriptionsPage />} />
             </Route>
             <Route element = {<TutorProtectedRoute />} />
             {/* tutor */}
@@ -95,6 +102,11 @@ export const AppRouter = () => (
     <Route path="/repetiteur/avis" element={<TutorReviewsPage />} />
     <Route path="/repetiteur/revenus" element={<TutorRevenuePage />} />
     <Route path="repetiteur/parametres" element={<TutorSettingsPage />} />
+    <Route path="/repetiteur/abonnement" element={<TutorSubscriptionPage />} />
+    <Route
+  path="/repetiteur/groupes/:groupId/abonnement"
+  element={<TutorGroupSubscriptionPage />}
+/>
       </Route>
       {/* student */}
       <Route element={<StudentProtectedRoute />}>

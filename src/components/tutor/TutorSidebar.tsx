@@ -9,6 +9,7 @@ const links = [
   { label: '⭐ Mes avis',           path: '/repetiteur/avis' },
   { label: '💰 Mes revenus',        path: '/repetiteur/revenus' },
   { label: '⚙️ Paramètres',         path: '/repetiteur/parametres' },
+  { label: '💳 Mon abonnement', path: '/repetiteur/abonnement' },
 ];
 
 const TutorSidebar = () => {
