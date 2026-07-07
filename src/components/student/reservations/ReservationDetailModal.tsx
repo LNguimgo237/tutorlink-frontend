@@ -5,7 +5,7 @@
 // ============================================================
 
 import React, { useEffect } from "react";
-import type { Reservation } from "../../../types/reservations.types";
+import type { Reservation } from "../../../types/studentReservation.types";
 import ReservationStatusBadge from "./ReservationStatusBadge";
 import PaymentBadge from "./PaymentBadge";
 

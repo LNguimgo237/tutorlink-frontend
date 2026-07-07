@@ -23,7 +23,7 @@ const HomeNavbar = () => (
         className="text-white/80 hover:text-white transition-colors">
         Groupes
       </Link>
-      <a href="#comment-ca-marche"
+      <a href="tarifs"
         className="text-white/80 hover:text-white transition-colors">
         Comment ça marche
       </a>

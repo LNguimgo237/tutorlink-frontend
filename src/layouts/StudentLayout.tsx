@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import StudentSidebar from '../components/student/StudentSidebar';
-import ThemeToggle from '../components/shared/ThemeToggle';
+import ThemeToggle from '../components/ui/ThemeToggle';
 // Layout commun à toutes les pages de l'espace élève
 const StudentLayout = () => (
   <div className="flex min-h-screen bg-gray-50">

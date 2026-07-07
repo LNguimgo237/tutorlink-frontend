@@ -1,13 +1,13 @@
 // Créneau horaire disponible
 export interface TimeSlot {
   id: string;
-  day: string;          // 'LUN' | 'MAR' | 'MER' | 'JEU' | 'VEN' | 'SAM' | 'DIM'
-  startTime: string;    // ex: '16h'
-  endTime: string;      // ex: '18h'
-  available: boolean;   // disponible ou déjà réservé
+  day: string;
+  startTime: string;
+  endTime: string;
+  available: boolean;
 }
 
-// Informations du répétiteur sur la page réservation
+// Infos répétiteur sur la page réservation
 export interface BookingTutor {
   id: string;
   name: string;
@@ -16,19 +16,16 @@ export interface BookingTutor {
   quartier: string;
   rating: number;
   reviewCount: number;
-  hourlyPrice: number;  // prix par heure en FCFA
-  avatar?: string;
+  hourlyPrice: number;
+  phone: string;          // ← AJOUTÉ : numéro pour paiement direct
 }
 
-// Données du formulaire de réservation
+// Données formulaire réservation
+// ❌ SUPPRIMÉ : paymentMethod — paiement direct hors plateforme
 export interface BookingFormData {
   selectedSlot: TimeSlot | null;
   subject: string;
-  duration: number;         // en heures (1h, 1.5h, 2h, 3h)
-  studentName: string;      // élève concerné si différent
-  message: string;          // message optionnel au répétiteur
-  paymentMethod: 'MTN' | 'Orange' | null;
+  duration: number;
+  studentName: string;
+  message: string;
 }
-
-// Moyen de paiement
-export type PaymentMethod = 'MTN' | 'Orange';

@@ -1,30 +1,29 @@
-// Statut d'une demande
 export type RequestStatus = 'en_attente' | 'accepte' | 'refuse';
 
-// Détail complet d'une demande de cours
+// ❌ SUPPRIMÉ : paymentMethod, amount
+// → Le paiement se fait directement hors plateforme
 export interface CourseRequestDetail {
   id: string;
-  reference: string;          // ex: "REQ-2026-001"
+  reference: string;
   student: {
     id: string;
     name: string;
     email: string;
     phone: string;
-    level: string;            // ex: "Terminale D"
+    level: string;
     quartier: string;
   };
   subject: string;
-  requestedDate: string;      // ex: "Sam. 28 juin 2026"
-  requestedTime: string;      // ex: "14h00"
-  duration: number;           // en heures
-  message: string;            // message de l'élève
-  paymentMethod: 'MTN' | 'Orange';
-  amount: number;             // montant en FCFA
+  requestedDate: string;
+  requestedTime: string;
+  duration: number;
+  message: string;
   status: RequestStatus;
-  createdAt: string;          // date de la demande
+  createdAt: string;
+  // ✅ AJOUTÉ : montant estimatif INFORMATIF seulement
+  estimatedAmount: number;
 }
 
-// Filtres de la page
 export interface RequestFilters {
   search: string;
   status: RequestStatus | 'TOUS';

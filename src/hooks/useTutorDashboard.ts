@@ -102,12 +102,37 @@ export const useTutorDashboard = () => {
   ]);
 
   // ── ACTIVITÉ RÉCENTE MOCK ──
-  const [activity] = useState<TutorActivity[]>([
-    { id: 'a1', icon: '✅', message: 'Cours avec Junior Nkoumba marqué terminé', time: 'il y a 2h', isNew: true },
-    { id: 'a2', icon: '⭐', message: 'Nouvel avis 5 étoiles de Talla Mireille', time: 'hier', isNew: true },
-    { id: 'a3', icon: '💰', message: 'Paiement reçu de 4 000 FCFA via MTN MoMo', time: 'hier', isNew: false },
-    { id: 'a4', icon: '📩', message: 'Nouvelle demande de Mbouh Karine', time: 'il y a 3j', isNew: false },
-  ]);
+  // Dans le tableau recentActivity — modifier uniquement cette partie :
+const [activity] = useState<TutorActivity[]>([
+  {
+    id: 'a1',
+    icon: '✅',
+    message: 'Cours avec Junior Nkoumba marqué terminé',
+    time: 'il y a 2h',
+    isNew: true,
+  },
+  {
+    id: 'a2',
+    icon: '⭐',
+    message: 'Nouvel avis 5 étoiles de Talla Mireille',
+    time: 'hier',
+    isNew: true,
+  },
+  {
+    id: 'a3',
+    icon: '👥',
+    message: 'Cotisation groupe Maths BAC C/D reçue — Juillet 2026',
+    time: 'hier',
+    isNew: false,
+  },
+  {
+    id: 'a4',
+    icon: '📩',
+    message: 'Nouvelle demande de Mbouh Karine',
+    time: 'il y a 3j',
+    isNew: false,
+  },
+]);
 
   // Accepter une demande (mock)
   const handleAcceptRequest = (requestId: string) => {

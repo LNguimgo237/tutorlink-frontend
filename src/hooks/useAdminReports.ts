@@ -5,54 +5,65 @@ import {
 } from '../types/adminReports.types';
 
 export const useAdminReports = () => {
-
-  // Filtres actifs
   const [filters, setFilters] = useState<ReportFilters>({
     period: '30j', subject: '', quartier: '',
   });
 
-  // ── DONNÉES MOCK ── à remplacer par adminReportsService quand backend prêt
-
+  // ── STATS MOCK ── revenus = abonnements uniquement
   const stats: ReportStats = {
-    totalReservations: 30,
-    totalRevenus: 92500,
-    totalEleves: 128,
-    totalRepetiteurs: 12,
+    totalReservations: 3047,
+    // ❌ SUPPRIMÉ : totalRevenus (commissions cours)
+    // ✅ REMPLACÉ : revenus abonnements
+    totalRevenus: 1349000,
+    tutorSubscriptionRevenue: 1194000,
+    groupSubscriptionRevenue: 155000,
+    totalEleves: 1284,
+    totalRepetiteurs: 512,
     tauxSatisfaction: 98,
-    revenuMoyen: 3036,
-    reservationsParJour: 8,
+    // ❌ SUPPRIMÉ : revenuMoyen par réservation
+    totalGroupsActifs: 31,
+    totalTutorsActifs: 398,
   };
 
   const chartData: ChartDataPoint[] = [
-    { label: 'Jan', reservations: 12, revenus: 4200, inscriptions: 10 },
-    { label: 'Fév', reservations: 18, revenus: 6475, inscriptions: 12 },
-    { label: 'Mar', reservations: 21, revenus: 7350, inscriptions: 18 },
-    { label: 'Avr', reservations: 26, revenus: 9345, inscriptions: 19 },
-    { label: 'Mai', reservations: 31, revenus: 10850, inscriptions: 22 },
-    { label: 'Jun', reservations: 28, revenus: 10115, inscriptions: 20 },
+    { month: 'Jan', reservations: 120, revenus: 280000, inscriptions: 45 },
+    { month: 'Fév', reservations: 185, revenus: 780000, inscriptions: 62 },
+    { month: 'Mar', reservations: 210, revenus: 960000, inscriptions: 78 },
+    { month: 'Avr', reservations: 267, revenus: 1100000, inscriptions: 91 },
+    { month: 'Mai', reservations: 310, revenus: 1250000, inscriptions: 104 },
+    { month: 'Jun', reservations: 289, revenus: 1349000, inscriptions: 87 },
+  ];
+
+  // Données abonnements pour graphique séparé
+  const subscriptionData = [
+    { month: 'Jan', tutors: 120, groups: 8 },
+    { month: 'Fév', tutors: 198, groups: 14 },
+    { month: 'Mar', tutors: 267, groups: 19 },
+    { month: 'Avr', tutors: 312, groups: 24 },
+    { month: 'Mai', tutors: 367, groups: 28 },
+    { month: 'Jun', tutors: 398, groups: 31 },
   ];
 
   const subjectPerformance: SubjectPerformance[] = [
-    { subject: 'Mathématiques', reservations: 12, revenus: 4340, satisfaction: 4.8, pct: 41 },
-    { subject: 'Physique-Chimie', reservations: 20,  revenus: 28700, satisfaction: 4.7, pct: 27 },
-    { subject: 'Anglais',         reservations: 54,  revenus: 18900, satisfaction: 4.9, pct: 18 },
-    { subject: 'Français',        reservations: 29,  revenus: 10150, satisfaction: 4.6, pct: 10 },
-    { subject: 'SVT',             reservations: 15,  revenus: 5495,  satisfaction: 4.5, pct: 4  },
+    { subject: 'Mathématiques', reservations: 1240, revenus: 0, satisfaction: 4.8, pct: 41 },
+    { subject: 'Physique-Chimie', reservations: 820, revenus: 0, satisfaction: 4.7, pct: 27 },
+    { subject: 'Anglais', reservations: 540, revenus: 0, satisfaction: 4.9, pct: 18 },
+    { subject: 'Français', reservations: 290, revenus: 0, satisfaction: 4.6, pct: 10 },
+    { subject: 'SVT', reservations: 157, revenus: 0, satisfaction: 4.5, pct: 4 },
   ];
 
   const quartierStats: QuartierStats[] = [
-    { quartier: 'Centre Dschang', reservations: 12, revenus: 4340000, pct: 41 },
-    { quartier: 'Foto',           reservations: 20,  revenus: 2870000, pct: 27 },
-    { quartier: 'Ngui',           reservations: 15,  revenus: 1890000, pct: 18 },
-    { quartier: 'Bafoussam Road', reservations: 10,  revenus: 1015000, pct: 10 },
-    { quartier: 'Tsinkop',        reservations: 8,  revenus: 549500,  pct: 4  },
+    { quartier: 'Centre Dschang', reservations: 1240, revenus: 0, pct: 41 },
+    { quartier: 'Foto', reservations: 820, revenus: 0, pct: 27 },
+    { quartier: 'Ngui', reservations: 540, revenus: 0, pct: 18 },
+    { quartier: 'Bafoussam Road', reservations: 290, revenus: 0, pct: 10 },
+    { quartier: 'Tsinkop', reservations: 157, revenus: 0, pct: 4 },
   ];
 
-  // Export CSV (mock — ouvre une fenêtre de téléchargement)
   const handleExportCSV = () => {
     const rows = [
-      ['Mois', 'Réservations', 'Revenus FCFA', 'Inscriptions'],
-      ...chartData.map(d => [d.label, d.reservations, d.revenus, d.inscriptions]),
+      ['Mois', 'Réservations', 'Revenus abonnements', 'Inscriptions'],
+      ...chartData.map(d => [d.month, d.reservations, d.revenus, d.inscriptions]),
     ];
     const csv = rows.map(r => r.join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
@@ -66,7 +77,8 @@ export const useAdminReports = () => {
 
   return {
     filters, setFilters,
-    stats, chartData, subjectPerformance, quartierStats,
+    stats, chartData, subscriptionData,
+    subjectPerformance, quartierStats,
     handleExportCSV,
   };
 };

@@ -84,7 +84,7 @@ const TutorCard = ({
                      text-white font-bold text-xs py-2 rounded-lg
                      cursor-pointer transition-colors"
         >
-          Réserver
+           📅 Demander un cours
         </button>
       </div>
     </div>

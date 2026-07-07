@@ -5,8 +5,8 @@
 // ============================================================
 
 import React, { useState, useEffect } from "react";
-import type { Reservation } from "../../../types/reservations.types";
-import { CANCEL_REASONS } from "../../../types/reservations.types";
+import type { Reservation } from "../../../types/studentReservation.types";
+import { CANCEL_REASONS } from "../../../types/studentReservation.types";
 
 interface Props {
   isOpen: boolean;                              // Contrôle l'affichage

@@ -8,35 +8,33 @@ interface Props {
   onDetail: (r: CourseRequestDetail) => void;
 }
 
-// Carte d'une demande de cours
+// Carte demande — ❌ SUPPRIMÉ : opérateur paiement (MTN/Orange)
+// ✅ GARDÉ : montant estimatif pour information seulement
 const RequestCard = ({ request: r, onAccept, onRefuse, onDetail }: Props) => (
   <div className={`bg-white rounded-xl shadow-sm border-l-4 p-5
-                   transition-shadow hover:shadow-md
-                   ${r.status === 'en_attente'
-                     ? 'border-l-orange-400'
-                     : r.status === 'accepte'
-                       ? 'border-l-green-500'
-                       : 'border-l-red-400'
-                   }`}>
+                   hover:shadow-md transition-shadow
+                   ${r.status === 'en_attente' ? 'border-l-orange-400'
+                     : r.status === 'accepte' ? 'border-l-green-500'
+                     : 'border-l-red-400'}`}>
 
-    {/* En-tête carte */}
+    {/* En-tête */}
     <div className="flex justify-between items-start mb-3">
       <div>
-        {/* Référence */}
-        <p className="text-xs text-gray-400 font-mono mb-1">{r.reference}</p>
-        {/* Nom élève */}
+        <p className="text-xs text-gray-400 font-mono mb-1">
+          {r.reference}
+        </p>
         <h3 className="font-bold text-gray-800">{r.student.name}</h3>
         <p className="text-xs text-gray-500">
           {r.student.level} · 📍 {r.student.quartier}
         </p>
       </div>
-      <div className="flex flex-col items-end gap-2">
+      <div className="flex flex-col items-end gap-1">
         <RequestStatusBadge status={r.status} />
         <p className="text-xs text-gray-400">{r.createdAt}</p>
       </div>
     </div>
 
-    {/* Détails du cours */}
+    {/* Détails cours */}
     <div className="grid grid-cols-2 gap-3 mb-3">
       <div className="bg-gray-50 rounded-lg p-3">
         <p className="text-xs text-gray-400 mb-1">📅 Date souhaitée</p>
@@ -52,7 +50,7 @@ const RequestCard = ({ request: r, onAccept, onRefuse, onDetail }: Props) => (
       </div>
     </div>
 
-    {/* Message de l'élève */}
+    {/* Message */}
     <div className="bg-blue-50 rounded-lg p-3 mb-3">
       <p className="text-xs text-blue-500 font-semibold mb-1">
         💬 Message de l'élève
@@ -60,29 +58,37 @@ const RequestCard = ({ request: r, onAccept, onRefuse, onDetail }: Props) => (
       <p className="text-sm text-gray-600 italic">"{r.message}"</p>
     </div>
 
-    {/* Paiement + montant */}
-    <div className="flex justify-between items-center mb-4">
-      <span className="text-xs text-gray-500">
-        💳 {r.paymentMethod === 'MTN' ? '📱 MTN Mobile Money' : '🟠 Orange Money'}
-      </span>
-      <span className="font-bold text-blue-900 text-base">
-        {r.amount.toLocaleString()} FCFA
-      </span>
+    {/* ✅ MONTANT ESTIMATIF + INFO PAIEMENT DIRECT */}
+    <div className="bg-yellow-50 border border-yellow-200
+                    rounded-lg p-3 mb-4">
+      <div className="flex justify-between items-center">
+        <div>
+          <p className="text-xs text-yellow-700 font-semibold">
+            💰 Montant estimatif
+          </p>
+          <p className="text-xs text-yellow-600 mt-0.5">
+            Paiement direct par l'élève (MTN/Orange)
+          </p>
+        </div>
+        <p className="font-bold text-yellow-800 text-lg">
+          {r.estimatedAmount.toLocaleString()} FCFA
+        </p>
+      </div>
+      <p className="text-xs text-yellow-600 mt-2">
+        📱 Contact élève : <strong>{r.student.phone}</strong>
+      </p>
     </div>
 
-    {/* Boutons action */}
+    {/* Boutons */}
     <div className="flex gap-3">
-      {/* Détail */}
       <button
         onClick={() => onDetail(r)}
-        className="border border-gray-200 text-gray-600
-                   text-sm px-4 py-2 rounded-lg hover:bg-gray-50
+        className="border border-gray-200 text-gray-600 text-sm
+                   px-4 py-2 rounded-lg hover:bg-gray-50
                    cursor-pointer transition-colors"
       >
         👁 Détail
       </button>
-
-      {/* Accepter — uniquement si en attente */}
       {r.status === 'en_attente' && (
         <>
           <button

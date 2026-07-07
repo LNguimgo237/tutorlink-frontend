@@ -4,41 +4,72 @@ import { DashboardStats, MonthlyData, ModerationAlert, RecentRegistration } from
 export const useAdminStats = () => {
   const [loading, setLoading] = useState(true);
 
-  // Données mock — à remplacer par adminDashboardService quand le backend est prêt
+  // ── STATS MOCK ── revenus = abonnements uniquement
   const [stats] = useState<DashboardStats>({
-    totalUsers: 56,
-    totalTutors: 5,
-    totalReservations: 22,
-    totalRevenue: 9250,
-    pendingValidations: 15,
-    activeSessionsToday: 20,
-    totalGroupes: 56,
+    totalUsers: 1284,
+    totalTutors: 512,
+    totalReservations: 3047,
+    // ❌ SUPPRIMÉ : totalRevenue (commissions cours)
+    // ✅ REMPLACÉ PAR : revenus abonnements
+    totalRevenue: 1349000,        // 398×3000 + 31×5000
+    tutorSubscriptionRevenue: 1194000,  // 398 répétiteurs actifs
+    groupSubscriptionRevenue: 155000,   // 31 groupes actifs
+    pendingValidations: 14,
+    activeSessionsToday: 23,
+    // ✅ NOUVEAU : abonnements en alerte
+    tutorsExpiringThisWeek: 8,   // répétiteurs dont abonnement expire
+    groupsExpiringThisWeek: 3,   // groupes dont abonnement expire
   });
 
   const [monthlyData] = useState<MonthlyData[]>([
-    { month: 'Jan', reservations: 80, inscriptions: 45 },
-    { month: 'Fév', reservations: 100, inscriptions: 62 },
-    { month: 'Mar', reservations: 120, inscriptions: 78 },
-    { month: 'Avr', reservations: 60, inscriptions: 45 },
-    { month: 'Mai', reservations: 45, inscriptions: 19 },
-    { month: 'Jun', reservations: 23, inscriptions: 12 },
+    { month: 'Jan', reservations: 120, inscriptions: 45 },
+    { month: 'Fév', reservations: 185, inscriptions: 62 },
+    { month: 'Mar', reservations: 210, inscriptions: 78 },
+    { month: 'Avr', reservations: 267, inscriptions: 91 },
+    { month: 'Mai', reservations: 310, inscriptions: 104 },
+    { month: 'Jun', reservations: 289, inscriptions: 87 },
   ]);
 
   const [alerts] = useState<ModerationAlert[]>([
-    { id: '1', type: 'validation', message: '12 répétiteurs en attente de validation', date: '2026-06-22', urgent: true },
-    { id: '2', type: 'signalement', message: 'Signalement sur M. Nguimgo L.', date: '2026-06-21', urgent: false },
-    { id: '3', type: 'litige', message: 'Litige paiement — réservation #1042', date: '2026-06-20', urgent: true },
+    {
+      id: '1',
+      type: 'validation',
+      message: '14 répétiteurs en attente de validation',
+      date: '2026-06-22',
+      urgent: true,
+    },
+    {
+      id: '2',
+      type: 'signalement',
+      message: 'Signalement sur M. Kamga Eric',
+      date: '2026-06-21',
+      urgent: false,
+    },
+    // ✅ NOUVEAU : alertes abonnements
+    {
+      id: '3',
+      type: 'validation',
+      message: '8 répétiteurs dont l\'abonnement expire cette semaine',
+      date: '2026-06-22',
+      urgent: true,
+    },
+    {
+      id: '4',
+      type: 'validation',
+      message: '3 groupes dont l\'abonnement expire cette semaine',
+      date: '2026-06-22',
+      urgent: false,
+    },
   ]);
 
   const [recentRegistrations] = useState<RecentRegistration[]>([
-    { id: '1', name: 'M. Leonel Nguimgo', role:'REPETITEUR', date: '2026-06-22', status: 'en_attente' },
-    { id: '2', name: 'Mll Larissa', role: 'ELEVE', date: '2026-06-22', status: 'actif' },
-    { id: '3', name: 'M. Nguena Jules', role: 'REPETITEUR', date: '2026-06-21', status: 'en_attente' },
-    { id: '4', name: 'Abarka', role: 'ELEVE', date: '2026-06-21', status: 'actif' },
+    { id: '1', name: 'Mme Fotso Aline', role: 'REPETITEUR', date: '2026-06-22', status: 'en_attente' },
+    { id: '2', name: 'Paul Nkeng', role: 'ELEVE', date: '2026-06-22', status: 'actif' },
+    { id: '3', name: 'M. Tagne Jules', role: 'REPETITEUR', date: '2026-06-21', status: 'en_attente' },
+    { id: '4', name: 'Marie Tchana', role: 'ELEVE', date: '2026-06-21', status: 'actif' },
   ]);
 
   useEffect(() => {
-    // Simule un chargement de 800ms
     const t = setTimeout(() => setLoading(false), 800);
     return () => clearTimeout(t);
   }, []);

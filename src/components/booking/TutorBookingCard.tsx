@@ -1,22 +1,25 @@
-import { BookingTutor, TimeSlot, BookingFormData } from '../../types/booking.types';
+import { BookingTutor, TimeSlot } from '../../types/booking.types';
 
 interface Props {
   tutor: BookingTutor;
   selectedSlot: TimeSlot | null;
   duration: number;
-  total: number;
+  estimatedAmount: number;
   loading: boolean;
+  submitted: boolean;
   onConfirm: () => void;
 }
 
-// Carte répétiteur fixe à gauche — résumé de la réservation
+// Carte répétiteur — affiche infos + montant ESTIMATIF
+// Le paiement se fait DIRECTEMENT au répétiteur hors plateforme
 const TutorBookingCard = ({
-  tutor, selectedSlot, duration, total, loading, onConfirm
+  tutor, selectedSlot, duration,
+  estimatedAmount, loading, submitted, onConfirm,
 }: Props) => (
   <div className="bg-[#1a2744] text-white rounded-xl p-5
                   flex flex-col gap-4 sticky top-6">
 
-    {/* Avatar + infos répétiteur */}
+    {/* Avatar + infos */}
     <div className="flex items-center gap-3">
       <div className="w-14 h-14 rounded-full bg-yellow-400
                       flex items-center justify-center text-2xl flex-shrink-0">
@@ -33,22 +36,17 @@ const TutorBookingCard = ({
       </div>
     </div>
 
-    {/* Séparateur */}
     <div className="border-t border-blue-700" />
 
-    {/* Récapitulatif réservation */}
+    {/* Récapitulatif créneau */}
     <div className="flex flex-col gap-2 text-sm">
       <div className="flex justify-between">
         <span className="text-blue-300">Lieu</span>
         <span>📍 {tutor.quartier}</span>
       </div>
-      <div className="flex justify-between">
-        <span className="text-blue-300">Note</span>
-        <span className="text-yellow-400 font-bold">{tutor.rating}</span>
-      </div>
       {selectedSlot && (
         <div className="flex justify-between">
-          <span className="text-blue-300">Créneau choisi</span>
+          <span className="text-blue-300">Créneau</span>
           <span>{selectedSlot.day} · {selectedSlot.startTime}-{selectedSlot.endTime}</span>
         </div>
       )}
@@ -56,34 +54,63 @@ const TutorBookingCard = ({
         <span className="text-blue-300">Durée</span>
         <span>{duration}h</span>
       </div>
+      <div className="flex justify-between">
+        <span className="text-blue-300">Tarif</span>
+        <span className="font-bold text-yellow-400">
+          {tutor.hourlyPrice.toLocaleString()} FCFA/h
+        </span>
+      </div>
     </div>
 
-    {/* Séparateur */}
     <div className="border-t border-blue-700" />
 
-    {/* Total */}
-    <div className="flex justify-between items-center">
-      <span className="text-blue-300 text-sm">Total</span>
-      <span className="text-xl font-bold text-yellow-400">
-        {total.toLocaleString()} FCFA
-      </span>
+    {/* Montant estimatif */}
+    <div className="bg-blue-800 rounded-xl p-3">
+      <p className="text-xs text-blue-300 mb-1">Montant estimatif</p>
+      <p className="text-xl font-bold text-yellow-400">
+        {estimatedAmount.toLocaleString()} FCFA
+      </p>
+      <p className="text-xs text-blue-300 mt-1">
+        À régler directement au répétiteur
+      </p>
     </div>
 
-    {/* Bouton confirmer */}
-    <button
-      onClick={onConfirm}
-      disabled={loading}
-      className="w-full bg-yellow-400 hover:bg-yellow-500
-                 text-gray-900 font-bold py-3 rounded-xl
-                 cursor-pointer transition-colors disabled:opacity-50
-                 disabled:cursor-not-allowed text-sm"
-    >
-      {loading ? 'Traitement...' : '✅ Confirmer la réservation'}
-    </button>
+    {/* Info paiement direct */}
+    <div className="bg-yellow-400/10 border border-yellow-400/30
+                    rounded-xl p-3">
+      <p className="text-xs font-bold text-yellow-400 mb-1">
+        💳 Paiement direct
+      </p>
+      <p className="text-xs text-blue-200 leading-relaxed">
+        Payez directement via MTN MoMo ou Orange Money au numéro
+        du répétiteur après confirmation du cours.
+      </p>
+      <p className="text-sm font-bold text-white mt-2">
+        📱 {tutor.phone}
+      </p>
+    </div>
 
-    {/* Note paiement */}
+    {/* Bouton confirmer la demande */}
+    {submitted ? (
+      <div className="bg-green-500 rounded-xl p-3 text-center">
+        <p className="font-bold text-sm">✅ Demande envoyée !</p>
+        <p className="text-xs mt-1">Redirection...</p>
+      </div>
+    ) : (
+      <button
+        onClick={onConfirm}
+        disabled={loading || !selectedSlot}
+        className="w-full bg-yellow-400 hover:bg-yellow-300
+                   text-gray-900 font-bold py-3 rounded-xl
+                   cursor-pointer transition-colors
+                   disabled:opacity-40 disabled:cursor-not-allowed text-sm"
+      >
+        {loading ? '⏳ Envoi...' : '📅 Envoyer ma demande de cours'}
+      </button>
+    )}
+
     <p className="text-xs text-blue-300 text-center">
-      Le paiement est débité uniquement après confirmation du répétiteur.
+      Le répétiteur confirme votre demande sous 24h.
     </p>
   </div>
 );

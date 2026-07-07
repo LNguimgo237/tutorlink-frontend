@@ -23,19 +23,44 @@ const TutorRequestsPage = () => {
         </p>
       </div>
 
-      {/* Cartes stats rapides */}
+      {/* ✅ BANNIÈRE NOUVEAU MODÈLE */}
+      <div className="bg-yellow-50 border border-yellow-200
+                      rounded-xl px-5 py-3 flex gap-3 items-start">
+        <span className="text-yellow-500 flex-shrink-0 mt-0.5">💡</span>
+        <p className="text-yellow-700 text-xs leading-relaxed">
+          <strong>mode de paiement :</strong> Les élèves vous
+          paient <strong>directement</strong> via MTN MoMo ou Orange Money
+          après confirmation du cours. Le numéro de téléphone de chaque
+          élève est affiché sur sa demande.
+        </p>
+      </div>
+
+      {/* Cartes stats — ❌ SUPPRIMÉ "Montant accepté" comme revenu plateforme */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'En attente', value: stats.enAttente, color: 'bg-orange-50 text-orange-800' },
-          { label: 'Acceptées',  value: stats.acceptees, color: 'bg-green-50 text-green-800' },
-          { label: 'Refusées',   value: stats.refusees,  color: 'bg-red-50 text-red-800' },
           {
-            label: 'Montant accepté',
-            value: `${stats.totalMontant.toLocaleString()} F`,
+            label: 'En attente',
+            value: stats.enAttente,
+            color: 'bg-orange-50 text-orange-800',
+          },
+          {
+            label: 'Acceptées',
+            value: stats.acceptees,
+            color: 'bg-green-50 text-green-800',
+          },
+          {
+            label: 'Refusées',
+            value: stats.refusees,
+            color: 'bg-red-50 text-red-800',
+          },
+          {
+            label: 'Estimatif à encaisser',
+            value: `${stats.estimatedTotal.toLocaleString()} F`,
             color: 'bg-blue-50 text-blue-800',
           },
         ].map(s => (
-          <div key={s.label} className={`${s.color} rounded-xl p-4 text-center`}>
+          <div key={s.label}
+            className={`${s.color} rounded-xl p-4 text-center`}>
             <p className="text-2xl font-bold">{s.value}</p>
             <p className="text-xs font-medium mt-1">{s.label}</p>
           </div>
@@ -45,7 +70,7 @@ const TutorRequestsPage = () => {
       {/* Filtres */}
       <RequestFilterBar filters={filters} onChange={setFilters} />
 
-      {/* Liste des demandes en grille */}
+      {/* Liste */}
       {filteredRequests.length === 0 ? (
         <div className="bg-white rounded-xl shadow-sm p-12 text-center">
           <p className="text-gray-300 text-lg">Aucune demande trouvée</p>
@@ -64,7 +89,6 @@ const TutorRequestsPage = () => {
         </div>
       )}
 
-      {/* Drawer détail */}
       {selectedRequest && (
         <RequestDetailDrawer
           request={selectedRequest}

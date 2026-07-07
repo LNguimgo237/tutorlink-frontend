@@ -7,7 +7,7 @@ import React from "react";
 import type {
   PaymentMethod,
   PaymentStatus,
-} from "../../../types/reservations.types";
+} from "../../../types/studentReservation.types";
 
 interface Props {
   method: PaymentMethod;     // Moyen de paiement utilisé

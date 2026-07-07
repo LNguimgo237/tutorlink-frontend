@@ -8,9 +8,8 @@ const MyGroupsTable = ({ groups }: Props) => {
 
   return (
     <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-
-      {/* En-tête section */}
-      <div className="flex justify-between items-center px-5 py-4 border-b border-gray-100">
+      <div className="flex justify-between items-center px-5 py-4
+                      border-b border-gray-100">
         <h3 className="font-bold text-gray-700">
           👥 Mes groupes de répétition
         </h3>
@@ -24,7 +23,6 @@ const MyGroupsTable = ({ groups }: Props) => {
         </button>
       </div>
 
-      {/* Tableau */}
       <table className="w-full text-sm">
         <thead>
           <tr className="bg-gray-50 text-gray-500 text-xs uppercase">
@@ -32,17 +30,16 @@ const MyGroupsTable = ({ groups }: Props) => {
             <th className="text-left px-5 py-3 font-semibold">Matière</th>
             <th className="text-left px-5 py-3 font-semibold">Admin</th>
             <th className="text-left px-5 py-3 font-semibold">Prochaine séance</th>
-            <th className="text-left px-5 py-3 font-semibold">Paiement</th>
+            {/* ✅ Cotisation groupe — passe par la plateforme */}
+            <th className="text-left px-5 py-3 font-semibold">Cotisation</th>
             <th className="text-left px-5 py-3 font-semibold">Statut</th>
           </tr>
         </thead>
         <tbody>
           {groups.map((g, i) => (
-            <tr
-              key={g.id}
+            <tr key={g.id}
               className={`border-t border-gray-50
-                ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}`}
-            >
+                ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}`}>
               <td className="px-5 py-3 font-medium text-gray-800">
                 {g.name}
               </td>

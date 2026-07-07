@@ -7,7 +7,7 @@ import React from "react";
 import type {
   ReservationFilter,
   FilterOption,
-} from "../../../types/reservations.types";
+} from "../../../types/studentReservation.types";
 
 interface Props {
   activeFilter: ReservationFilter;                     // Filtre actuellement sélectionné

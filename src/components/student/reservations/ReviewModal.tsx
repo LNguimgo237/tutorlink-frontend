@@ -5,7 +5,7 @@
 // ============================================================
 
 import React, { useState, useEffect } from "react";
-import type { Reservation } from "../../../types/reservations.types";
+import type { Reservation } from "../../../types/studentReservation.types";
 
 interface Props {
   isOpen: boolean;                              // Contrôle l'affichage

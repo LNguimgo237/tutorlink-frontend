@@ -19,14 +19,20 @@ export interface OtpPayload {
   otp: string;
 }
 // Chiffres clés affichés sur les cartes KPI
+// Ajouter ces champs dans DashboardStats
 export interface DashboardStats {
   totalUsers: number;
   totalTutors: number;
   totalReservations: number;
   totalRevenue: number;
+  // ✅ NOUVEAU : revenus détaillés abonnements
+  tutorSubscriptionRevenue: number;
+  groupSubscriptionRevenue: number;
   pendingValidations: number;
   activeSessionsToday: number;
-  totalGroupes: number;
+  // ✅ NOUVEAU : alertes abonnements expirant
+  tutorsExpiringThisWeek: number;
+  groupsExpiringThisWeek: number;
 }
 
 // Un point de données pour le graphique mensuel

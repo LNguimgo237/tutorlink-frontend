@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminTopbar from '@/components/admin/AdminTopbar';
-import ThemeToggle from '../components/shared/ThemeToggle';
+import ThemeToggle from '../components/ui/ThemeToggle';
 
 const AdminLayout = () => (
   <div style={{ display: 'flex', minHeight: '100vh' }}>

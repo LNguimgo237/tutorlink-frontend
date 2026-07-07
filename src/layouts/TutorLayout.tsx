@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import TutorSidebar from '../components/tutor/TutorSidebar';
-import ThemeToggle from '../components/shared/ThemeToggle';
+import ThemeToggle from '../components/ui/ThemeToggle';
 import SubscriptionBanner from '../components/tutor/subscription/SubscriptionBanner';
 import { useSubscription } from '../hooks/useSubscription';
 // Layout commun à toutes les pages de l'espace répétiteu

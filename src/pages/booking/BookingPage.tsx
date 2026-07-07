@@ -5,13 +5,11 @@ import SlotCalendar from '../../components/booking/SlotCalendar';
 import BookingForm from '../../components/booking/BookingForm';
 
 const BookingPage = () => {
-  // Récupère l'id du répétiteur depuis l'URL (/reserver/:tutorId)
   const { tutorId } = useParams<{ tutorId: string }>();
-
   const {
     tutor, slots, formData, setFormData,
-    error, loading, total,
-    handleSelectSlot, handleSelectPayment, handleSubmit,
+    error, loading, submitted, estimatedAmount,
+    handleSelectSlot, handleSubmit,
   } = useBooking(tutorId);
 
   return (
@@ -20,13 +18,11 @@ const BookingPage = () => {
       {/* Barre du haut */}
       <div className="bg-[#1a2744] text-white px-6 py-3
                       flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <span className="text-yellow-400 font-bold text-lg">🎓 TutorLink</span>
-        </div>
-        <Link
-          to={`/repetiteurs/${tutor.id}`}
-          className="text-blue-300 hover:text-white text-sm transition-colors"
-        >
+        <span className="text-yellow-400 font-bold text-lg">
+          🎓 TutorLink
+        </span>
+        <Link to={`/repetiteurs/${tutor.id}`}
+          className="text-blue-300 hover:text-white text-sm transition-colors">
           ← Profil répétiteur
         </Link>
       </div>
@@ -36,42 +32,44 @@ const BookingPage = () => {
                       text-xs text-gray-400">
         <Link to="/" className="hover:text-gray-600">Accueil</Link>
         <span className="mx-2">›</span>
-        <Link to="/repetiteurs" className="hover:text-gray-600">Répétiteurs</Link>
+        <Link to="/repetiteurs" className="hover:text-gray-600">
+          Répétiteurs
+        </Link>
         <span className="mx-2">›</span>
-        <span className="text-gray-600 font-medium">Réservation</span>
+        <span className="text-gray-600 font-medium">Demande de cours</span>
       </div>
 
       {/* Contenu principal */}
       <div className="max-w-5xl mx-auto px-6 py-6">
         <div className="grid grid-cols-3 gap-6">
 
-          {/* Colonne gauche — carte répétiteur fixe */}
+          {/* Gauche — carte répétiteur */}
           <div className="col-span-1">
             <TutorBookingCard
               tutor={tutor}
               selectedSlot={formData.selectedSlot}
               duration={formData.duration}
-              total={total}
+              estimatedAmount={estimatedAmount}
               loading={loading}
+              submitted={submitted}
               onConfirm={handleSubmit}
             />
           </div>
 
-          {/* Colonne droite — calendrier + formulaire */}
+          {/* Droite — calendrier + formulaire */}
           <div className="col-span-2 flex flex-col gap-5">
-
-            {/* Calendrier des créneaux */}
             <SlotCalendar
               slots={slots}
               selectedSlot={formData.selectedSlot}
               onSelect={handleSelectSlot}
             />
-
-            {/* Formulaire détails + paiement */}
+            {/* Passe le téléphone et tarif au formulaire */}
             <BookingForm
               formData={formData}
               onChange={setFormData}
               error={error}
+              tutorPhone={tutor.phone}
+              hourlyPrice={tutor.hourlyPrice}
             />
           </div>
         </div>

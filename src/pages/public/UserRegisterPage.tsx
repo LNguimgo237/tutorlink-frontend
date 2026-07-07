@@ -6,7 +6,7 @@ import PersonalInfoForm from '../../components/register/PersonalInfoForm';
 import TutorPedagogicForm from '../../components/register/TutorPedagogicForm';
 import TutorDocumentsForm from '../../components/register/TutorDocumentsForm';
 import ConfirmationStep from '../../components/register/ConfirmationStep';
-import PublicFooter from "../../components/public/layout/PublicFooter";
+
 const RegisterPage = () => {
   const {
     step, role, setRole,
@@ -21,7 +21,6 @@ const RegisterPage = () => {
   } = useRegister();
 
   return (
-    <>
     <div className="min-h-screen bg-gray-50">
 
       {/* Navbar */}
@@ -31,23 +30,17 @@ const RegisterPage = () => {
           🎓 Tutor<span className="text-yellow-400">Link</span>
         </Link>
         <Link to="/connexion"
-          className="text-blue-200 hover:text-white text-sm
-                     transition-colors">
+          className="text-blue-200 hover:text-white text-sm">
           J'ai déjà un compte
         </Link>
       </nav>
 
-      {/* Carte formulaire */}
       <div className="max-w-lg mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl shadow-sm
                         border border-gray-100 overflow-hidden">
-
-          {/* Barre orange en haut */}
           <div className="h-1 bg-yellow-400" />
 
           <div className="p-6">
-
-            {/* Barre de progression */}
             {step !== 'confirmation' && (
               <StepProgressBar
                 current={stepNumber}
@@ -56,11 +49,31 @@ const RegisterPage = () => {
               />
             )}
 
-            {/* Contenu selon l'étape */}
+            {/* ✅ NOUVEAU : Bandeau modèle économique pour répétiteur */}
+            {role === 'REPETITEUR' && step === 'role' && (
+              <div className="mb-4 bg-[#1a2744] rounded-xl p-4 text-white">
+                <p className="font-bold text-sm mb-2">
+                  💡 Modèle TutorLink pour répétiteurs
+                </p>
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { icon: '🎁', text: '2 mois gratuits', sub: 'Essai sans engagement' },
+                    { icon: '💳', text: '3 000 F/mois', sub: 'Abonnement simple' },
+                    { icon: '💰', text: '0% commission', sub: 'Gardez 100% de vos revenus' },
+                  ].map(item => (
+                    <div key={item.text} className="bg-blue-800 rounded-lg p-2 text-center">
+                      <p className="text-lg">{item.icon}</p>
+                      <p className="text-xs font-bold mt-1">{item.text}</p>
+                      <p className="text-xs text-blue-300">{item.sub}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {step === 'role' && (
               <RoleSelector selected={role} onSelect={setRole} />
             )}
-
             {step === 'infos' && (
               <PersonalInfoForm
                 data={baseData}
@@ -69,7 +82,6 @@ const RegisterPage = () => {
                 role={role}
               />
             )}
-
             {step === 'pedagogique' && (
               <TutorPedagogicForm
                 data={tutorData}
@@ -77,7 +89,6 @@ const RegisterPage = () => {
                 errors={errors}
               />
             )}
-
             {step === 'documents' && (
               <TutorDocumentsForm
                 documents={documents}
@@ -87,7 +98,6 @@ const RegisterPage = () => {
                 onRemove={handleDocumentRemove}
               />
             )}
-
             {step === 'confirmation' && (
               <ConfirmationStep
                 role={role!}
@@ -96,10 +106,8 @@ const RegisterPage = () => {
               />
             )}
 
-            {/* Boutons navigation — masqués à la confirmation */}
             {step !== 'confirmation' && (
               <div className="flex gap-3 mt-6">
-                {/* Retour */}
                 {step !== 'role' && (
                   <button
                     onClick={handleBack}
@@ -110,8 +118,6 @@ const RegisterPage = () => {
                     ← Retour
                   </button>
                 )}
-
-                {/* Suivant / Créer */}
                 <button
                   onClick={handleNext}
                   disabled={loading || (step === 'role' && !role)}
@@ -130,7 +136,6 @@ const RegisterPage = () => {
               </div>
             )}
 
-            {/* Lien connexion */}
             {step !== 'confirmation' && (
               <p className="text-center text-sm text-gray-500 mt-4">
                 Déjà inscrit ?{' '}
@@ -144,8 +149,6 @@ const RegisterPage = () => {
         </div>
       </div>
     </div>
-    <PublicFooter/>
-    </>
   );
 };
 

@@ -5,12 +5,10 @@ interface Props {
   onBook: () => void;
 }
 
-// Bandeau d'en-tête avec photo, infos clés et bouton réserver
 const TutorProfileHeader = ({ profile: p, onBook }: Props) => (
   <div className="bg-[#1a2744] text-white">
     <div className="max-w-5xl mx-auto px-6 py-6
                     flex items-center gap-5">
-
       {/* Avatar */}
       <div className="w-20 h-20 rounded-full bg-yellow-400
                       flex items-center justify-center
@@ -18,7 +16,7 @@ const TutorProfileHeader = ({ profile: p, onBook }: Props) => (
         {p.name.charAt(0)}
       </div>
 
-      {/* Infos principales */}
+      {/* Infos */}
       <div className="flex-1">
         <div className="flex items-center gap-2">
           <h1 className="text-xl font-bold">{p.name}</h1>
@@ -45,14 +43,19 @@ const TutorProfileHeader = ({ profile: p, onBook }: Props) => (
           {p.hourlyPrice.toLocaleString()} FCFA
           <span className="text-sm text-blue-200 font-normal"> / heure</span>
         </p>
+        {/* ✅ MODIFIÉ : "Demander un cours" au lieu de "Réserver" */}
         <button
           onClick={onBook}
           className="mt-3 bg-yellow-400 hover:bg-yellow-500
                      text-gray-900 font-bold px-6 py-2.5
                      rounded-lg cursor-pointer transition-colors"
         >
-          📅 Réserver un cours
+          📅 Demander un cours
         </button>
+        {/* ✅ NOUVEAU : badge paiement direct */}
+        <p className="text-xs text-blue-300 mt-2">
+          💳 Paiement direct MTN/Orange
+        </p>
       </div>
     </div>
   </div>

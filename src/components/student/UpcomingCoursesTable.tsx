@@ -67,7 +67,7 @@ const UpcomingCoursesTable = ({ courses }: Props) => {
                 </td>
                 <td className="px-5 py-3">
                   <button
-                    onClick={() => navigate(`/mes-reservations/${c.id}`)}
+                    onClick={() => navigate(`/mes-reservations`)}
                     className="border border-gray-200 text-gray-600
                                text-xs px-3 py-1 rounded-lg hover:bg-gray-50
                                cursor-pointer"

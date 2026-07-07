@@ -55,6 +55,7 @@ const AdminSubscriptionsPage = lazy(
 const TutorGroupSubscriptionPage = lazy(
   () => import('../pages/tutor/TutorGroupSubscriptionPage')
 );
+const PricingPage = lazy(() => import("../pages/public/PricingPage"));
 
 
 
@@ -78,6 +79,7 @@ export const AppRouter = () => (
   path="/booking/confirm/:bookingId"
   element={<BookingConfirmPage />}
 />
+<Route path="/tarifs" element={<PricingPage />} />
 
       {/* Routes admin */}
       <Route path="/admin/login" element={<AdminLoginPage />} />

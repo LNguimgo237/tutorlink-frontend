@@ -1,30 +1,18 @@
 import adminApi from './adminApi';
-import { ReservationFilters } from '../types/adminReservation.types';
 
-// ⚠️ BACKEND REQUIS — actif quand l'API sera prête
+// ⚠️ BACKEND REQUIS
 const adminReservationService = {
 
   // GET /admin/reservations — liste filtrée
-  getReservations: async (filters: Partial<ReservationFilters>) => {
+  getReservations: async (filters: object) => {
     const res = await adminApi.get('/reservations', { params: filters });
     return res.data;
   },
 
-  // PATCH /admin/reservations/:id/complete — marquer comme terminée
-  markAsComplete: async (id: string) => {
-    const res = await adminApi.patch(`/reservations/${id}/complete`);
-    return res.data;
-  },
-
-  // PATCH /admin/reservations/:id/cancel — annuler une réservation
-  cancelReservation: async (id: string, reason: string) => {
-    const res = await adminApi.patch(`/reservations/${id}/cancel`, { reason });
-    return res.data;
-  },
-
-  // POST /admin/reservations/:id/refund — rembourser via Mobile Money
-  refundReservation: async (id: string) => {
-    const res = await adminApi.post(`/reservations/${id}/refund`);
+  // PATCH /admin/reservations/:id/cancel — annuler
+  // ❌ SUPPRIMÉ : markAsComplete, refundReservation
+  cancelReservation: async (id: string) => {
+    const res = await adminApi.patch(`/reservations/${id}/cancel`);
     return res.data;
   },
 };

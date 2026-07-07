@@ -1,195 +1,139 @@
-// ============================================================
-// Page "Mes réservations" du tableau de bord élève
-// Affiche toutes les réservations avec filtres, cartes et modals
-// Routing : /eleve/reservations (protégé par StudentLayout)
-// ============================================================
-
-import React from "react";
-import { Link } from "react-router-dom";
-import { useReservationsPage }       from "@/hooks/useReservationsPage";
-import ReservationSummaryCards       from "../../components/student/reservations/ReservationSummaryCards";
-import ReservationFilterTabs         from "../../components/student/reservations/ReservationFilterTabs";
-import ReservationCard               from "../../components/student/reservations/ReservationCard";
-import ReservationDetailModal        from "../../components/student/reservations/ReservationDetailModal";
-import CancelReservationModal        from "../../components/student/reservations/CancelReservationModal";
-import ReviewModal                   from "../../components/student/reservations/ReviewModal";
-
-const StudentReservationsPage: React.FC = () => {
-
+import { useStudentReservations } from '../../hooks/useStudentReservations';
+import { useNavigate } from 'react-router-dom';
+import ReservationCard from '../../components/student/reservations/ReservationCard';
+import ReservationStatusBadge from '../../components/student/reservations/ReservationStatusBadge';
+import ReviewForm from '@/components/student/reviews/ReviewForm';
+import ReservationDetailModal from '@/components/student/reservations/ReservationDetailModal';
+const StudentReservationsPage = () => {
+  const navigate = useNavigate();
   const {
-    filteredReservations,
-    isLoading,
-    hasError,
-    summary,
-    activeFilter,
-    setActiveFilter,
-    filterCounts,
-    cancelModalOpen,
-    reservationToCancel,
-    openCancelModal,
-    closeCancelModal,
-    handleConfirmCancel,
-    isCancelling,
-    reviewModalOpen,
-    reservationToReview,
-    openReviewModal,
-    closeReviewModal,
-    handleSubmitReview,
-    isPostingReview,
-    detailModalOpen,
-    reservationDetail,
-    openDetailModal,
-    closeDetailModal,
-  } = useReservationsPage();
+    filteredReservations, filters, setFilters, stats,
+    selectedReservation, setSelectedReservation,
+    handleCancel, handleContact,
+  } = useStudentReservations();
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="flex flex-col gap-6">
 
-      {/* ── En-tête de la page ──────────────────────────── */}
-      <div className="flex items-start justify-between gap-4 flex-wrap">
+      {/* Titre */}
+      <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-xl font-bold text-[#1a2744]">
-            📋 Mes réservations
-          </h1>
-          <p className="text-sm text-gray-500 mt-0.5">
-            Suivez vos cours réservés, confirmez et évaluez vos répétiteurs.
+          <h2 className="text-xl font-bold text-gray-800">
+            📅 Mes réservations
+          </h2>
+          <p className="text-gray-400 text-sm mt-1">
+            Gérez vos demandes de cours avec vos répétiteurs.
           </p>
         </div>
-
-        {/* Bouton Nouvelle réservation */}
-        <Link
-          to="/repetiteurs"
-          className="
-            flex items-center gap-2 px-5 py-2.5 rounded-lg
-            bg-[#f5a623] text-[#1a2744] font-bold text-sm
-            hover:bg-[#e09415] transition-colors shadow-md
-            hover:shadow-lg flex-shrink-0
-          "
+        <button
+          onClick={() => navigate('/repetiteurs')}
+          className="bg-[#1a2744] hover:bg-blue-900 text-white
+                     font-bold px-4 py-2 rounded-xl text-sm
+                     cursor-pointer transition-colors"
         >
-          ➕ Nouvelle réservation
-        </Link>
+          + Nouvelle réservation
+        </button>
       </div>
 
-      {/* ── Cartes de résumé ─────────────────────────────── */}
-      <ReservationSummaryCards
-        totalReservations={summary.totalReservations}
-        totalCompleted={summary.totalCompleted}
-        totalSpent={summary.totalSpent}
-        upcomingCount={summary.upcomingCount}
-        isLoading={isLoading}
-      />
-
-      {/* ── Erreur de chargement ─────────────────────────── */}
-      {hasError && (
-        <div className="bg-red-50 border border-red-200 rounded-lg
-                        px-4 py-3 text-red-700 text-sm flex items-center gap-2">
-          ⚠️ Impossible de charger les réservations. Veuillez rafraîchir.
+      {/* Bannière modèle paiement */}
+      <div className="bg-yellow-50 border border-yellow-200
+                      rounded-xl px-4 py-3 flex gap-3 items-start">
+        <span className="text-yellow-500 text-xl flex-shrink-0">💳</span>
+        <div>
+          <p className="font-bold text-yellow-800 text-sm">
+            Paiement direct à votre répétiteur
+          </p>
+          <p className="text-yellow-700 text-xs mt-0.5 leading-relaxed">
+            Une fois votre cours confirmé, payez directement votre
+            répétiteur via MTN MoMo ou Orange Money au numéro affiché
+            sur chaque carte. Aucun paiement ne passe par TutorLink
+            pour les cours individuels.
+          </p>
         </div>
-      )}
+      </div>
 
-      {/* ── Filtres ──────────────────────────────────────── */}
-      <ReservationFilterTabs
-        activeFilter={activeFilter}
-        filterCounts={filterCounts}
-        onChange={setActiveFilter}
-      />
+      {/* Cartes statistiques */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { label: 'Total', value: stats.total, color: 'bg-gray-50 text-gray-700' },
+          { label: 'Confirmées', value: stats.confirmees, color: 'bg-blue-50 text-blue-700' },
+          { label: 'En attente', value: stats.enAttente, color: 'bg-orange-50 text-orange-700' },
+          { label: 'Terminées', value: stats.terminees, color: 'bg-green-50 text-green-700' },
+        ].map(s => (
+          <div key={s.label}
+            className={`${s.color} rounded-xl p-4 text-center`}>
+            <p className="text-2xl font-bold">{s.value}</p>
+            <p className="text-xs font-medium mt-1">{s.label}</p>
+          </div>
+        ))}
+      </div>
 
-      {/* ── Liste des réservations ───────────────────────── */}
-
-      {/* Skeleton de chargement */}
-      {isLoading && (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div
-              key={i}
-              className="bg-white rounded-xl border border-gray-200
-                         shadow-sm overflow-hidden animate-pulse"
+      {/* Filtres */}
+      <div className="bg-white rounded-xl shadow-sm p-4
+                      flex flex-wrap gap-3">
+        <input
+          placeholder="🔍 Répétiteur, matière, référence..."
+          value={filters.search}
+          onChange={e => setFilters({ ...filters, search: e.target.value })}
+          className="border border-gray-200 rounded-lg px-3 py-2
+                     text-sm flex-1 min-w-48 focus:outline-none
+                     focus:ring-2 focus:ring-blue-300"
+        />
+        <div className="flex gap-2 flex-wrap">
+          {[
+            { label: 'Toutes', value: 'TOUS' },
+            { label: 'Confirmées', value: 'confirme' },
+            { label: 'En attente', value: 'en_attente' },
+            { label: 'Terminées', value: 'termine' },
+            { label: 'Annulées', value: 'annule' },
+          ].map(opt => (
+            <button
+              key={opt.value}
+              onClick={() => setFilters({
+                ...filters,
+                status: opt.value as typeof filters.status
+              })}
+              className={`px-3 py-2 rounded-lg text-xs font-medium
+                          cursor-pointer transition-colors
+                          ${filters.status === opt.value
+                            ? 'bg-[#1a2744] text-white'
+                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                          }`}
             >
-              <div className="h-20 bg-gray-200" />
-              <div className="p-4 space-y-3">
-                <div className="h-3 bg-gray-200 rounded w-3/4" />
-                <div className="h-3 bg-gray-200 rounded w-1/2" />
-                <div className="h-3 bg-gray-200 rounded" />
-                <div className="h-8 bg-gray-200 rounded mt-2" />
-              </div>
-            </div>
+              {opt.label}
+            </button>
           ))}
         </div>
-      )}
+      </div>
 
-      {/* Grille des cartes */}
-      {!isLoading && filteredReservations.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {filteredReservations.map((reservation) => (
+      {/* Liste réservations */}
+      {filteredReservations.length === 0 ? (
+        <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+          <p className="text-4xl mb-4">📅</p>
+          <h3 className="font-bold text-gray-700 mb-2">
+            Aucune réservation trouvée
+          </h3>
+          <button
+            onClick={() => navigate('/repetiteurs')}
+            className="bg-[#1a2744] text-white font-bold px-6 py-2.5
+                       rounded-xl cursor-pointer mt-4"
+          >
+            Trouver un répétiteur
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {filteredReservations.map(r => (
             <ReservationCard
-              key={reservation.id}
-              reservation={reservation}
-              onViewDetail={openDetailModal}
-              onCancel={openCancelModal}
-              onReview={openReviewModal}
+              key={r.id}
+              reservation={r}
+              onDetail={setSelectedReservation}
+              onCancel={handleCancel}
+              onContact={handleContact}
             />
           ))}
         </div>
       )}
-
-      {/* État vide : aucune réservation dans ce filtre */}
-      {!isLoading && filteredReservations.length === 0 && !hasError && (
-        <div className="bg-white rounded-xl border border-gray-200
-                        shadow-sm py-16 text-center">
-          <span className="text-5xl block mb-4">📋</span>
-          <h3 className="text-lg font-bold text-[#1a2744] mb-2">
-            {activeFilter === "ALL"
-              ? "Aucune réservation"
-              : `Aucune réservation "${activeFilter.toLowerCase()}"`}
-          </h3>
-          <p className="text-gray-500 text-sm mb-6 max-w-xs mx-auto">
-            {activeFilter === "ALL"
-              ? "Vous n'avez pas encore réservé de cours. Trouvez un répétiteur pour commencer !"
-              : "Aucune réservation ne correspond à ce filtre."}
-          </p>
-          {activeFilter === "ALL" && (
-            <Link
-              to="/repetiteurs"
-              className="
-                inline-flex items-center gap-2 px-6 py-3 rounded-lg
-                bg-[#f5a623] text-[#1a2744] font-bold text-sm
-                hover:bg-[#e09415] transition-colors shadow-md
-              "
-            >
-              🔍 Trouver un répétiteur
-            </Link>
-          )}
-        </div>
-      )}
-
-      {/* ══ MODALS ══════════════════════════════════════════ */}
-
-      {/* Modal Détail */}
-      <ReservationDetailModal
-        isOpen={detailModalOpen}
-        reservation={reservationDetail}
-        onClose={closeDetailModal}
-        onCancel={openCancelModal}
-        onReview={openReviewModal}
-      />
-
-      {/* Modal Annulation */}
-      <CancelReservationModal
-        isOpen={cancelModalOpen}
-        reservation={reservationToCancel}
-        onClose={closeCancelModal}
-        onConfirm={handleConfirmCancel}
-        isLoading={isCancelling}
-      />
-
-      {/* Modal Avis */}
-      <ReviewModal
-        isOpen={reviewModalOpen}
-        reservation={reservationToReview}
-        onClose={closeReviewModal}
-        onSubmit={handleSubmitReview}
-        isLoading={isPostingReview}
-      />
     </div>
   );
 };

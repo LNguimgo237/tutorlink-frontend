@@ -1,16 +1,12 @@
-// Statut du cours
+// Statut cours uniquement
+// ❌ SUPPRIMÉ : PaymentStatus, PaymentOperator, MobileMoneyOperator
 export type CourseStatus = 'confirmee' | 'en_cours' | 'terminee' | 'annulee';
 
-// Opérateur Mobile Money
-export type MobileMoneyOperator = 'MTN' | 'Orange' | 'en_attente';
-
-// Statut du paiement
-export type PaymentStatus = 'paye_mtn' | 'paye_orange' | 'en_attente' | 'rembourse';
-
-// Structure complète d'une réservation
+// Réservation vue par l'admin
+// ❌ SUPPRIMÉ : amount, paymentStatus, operator, transactionId
 export interface AdminReservation {
   id: string;
-  reference: string;          // ex: RES-2026-001
+  reference: string;
   eleve: {
     name: string;
     email: string;
@@ -20,26 +16,23 @@ export interface AdminReservation {
     name: string;
     email: string;
     subject: string;
+    phone: string;      // ← pour info contact
   };
-  date: string;               // date du cours
-  timeSlot: string;           // ex: 14h00 - 16h00
-  duration: number;           // en heures
-  amount: number;             // montant en FCFA
+  date: string;
+  timeSlot: string;
+  duration: number;
   courseStatus: CourseStatus;
-  //paymentStatus: PaymentStatus;
-  operator: MobileMoneyOperator;
-  transactionId?: string;     // ID transaction Mobile Money
   quartier: string;
   createdAt: string;
-  notes?: string;             // notes admin
+  notes?: string;
+  // ✅ GARDÉ : montant estimatif seulement pour info
+  estimatedAmount: number;
 }
 
-// Filtres du tableau
+// Filtres simplifiés
 export interface ReservationFilters {
   search: string;
   courseStatus: CourseStatus | 'TOUS';
-  //paymentStatus: PaymentStatus | 'TOUS';
   dateFrom: string;
   dateTo: string;
-  subject: string;
 }

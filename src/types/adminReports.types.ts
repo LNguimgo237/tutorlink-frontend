@@ -3,10 +3,11 @@ export type ReportPeriod = '7j' | '30j' | '3m' | '6m' | '1an';
 
 // Un point de données pour les graphiques
 export interface ChartDataPoint {
-  label: string;      // ex: "Jan", "Fév", "Lun 16"
+  month: string;      // ex: "Jan", "Fév", "Lun 16"
   reservations: number;
   revenus: number;
   inscriptions: number;
+
 }
 
 // Statistiques globales de la période
@@ -16,8 +17,11 @@ export interface ReportStats {
   totalEleves: number;
   totalRepetiteurs: number;
   tauxSatisfaction: number;     // pourcentage
-  revenuMoyen: number;          // par réservation
+  totalGroupsActifs:number;         // par réservation
   reservationsParJour: number;  // moyenne
+  totalTutorsActifs: number;
+  tutorSubscriptionRevenue:number;
+  groupSubscriptionRevenue:number;
 }
 
 // Performance d'une matière

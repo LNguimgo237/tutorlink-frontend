@@ -1,24 +1,35 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+// ============================================================
+// FICHIER : src/main.tsx
+// MODIFICATION : Initialisation du thème AVANT le rendu React
+//               pour éviter le "flash" de thème incorrect
+// ============================================================
 
-import { ThemeProvider } from './context/ThemeContext.tsx' // Ajustez le chemin
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ThemeProvider>
-    <App />
-    </ThemeProvider>
-  </StrictMode>,
-  )
-  const savedTheme = localStorage.getItem('tutorlink-theme');
-if (savedTheme) {
-  const { state } = JSON.parse(savedTheme);
-  if (state?.isDark) {
-    document.documentElement.classList.add('dark');
+// ✅ AJOUT : Initialise le thème depuis localStorage
+// AVANT que React ne rende quoi que ce soit
+// → évite le flash blanc en mode sombre au rechargement
+(function initTheme() {
+  try {
+    const stored = localStorage.getItem("tutorlink-theme");
+    if (stored) {
+      const { state } = JSON.parse(stored);
+      if (state?.isDark) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  } catch {
+    // Ignore les erreurs de parsing
   }
-}
+})();
 
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
   
 

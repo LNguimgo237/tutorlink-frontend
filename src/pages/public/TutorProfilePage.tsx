@@ -71,6 +71,26 @@ const TutorProfilePage = () => {
               onBook={handleBookCourse}
             />
             <VerificationsPanel verifications={profile.verifications} />
+            
+<div className="bg-white rounded-xl shadow-sm p-5">
+  <h3 className="font-bold text-gray-700 mb-3">
+    💰 Tarifs & Paiement
+  </h3>
+  <div className="flex flex-col gap-2 text-sm">
+    <div className="flex justify-between">
+      <span className="text-gray-500">Tarif horaire</span>
+      <span className="font-bold text-[#1a2744]">
+        {profile.hourlyPrice.toLocaleString()} FCFA/h
+      </span>
+    </div>
+    <div className="border-t border-gray-100 pt-2">
+      <p className="text-xs text-gray-500 leading-relaxed">
+        💳 Paiement direct au répétiteur via MTN MoMo ou Orange Money
+        après confirmation du cours. TutorLink ne prélève aucune commission.
+      </p>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>

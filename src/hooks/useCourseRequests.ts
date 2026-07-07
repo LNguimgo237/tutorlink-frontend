@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import {
-  CourseRequestDetail,
-  RequestFilters
+  CourseRequestDetail, RequestFilters
 } from '../types/courseRequest.types';
 
 export const useCourseRequests = () => {
 
-  // ── DONNÉES MOCK ──
+  // ── DEMANDES MOCK ── montants ESTIMATIFS uniquement
   const [requests, setRequests] = useState<CourseRequestDetail[]>([
     {
       id: 'r1',
       reference: 'REQ-2026-001',
       student: {
         id: 's1',
-        name: 'Ngono Christelle',
+        name: 'Mystell Sonna',
         email: 'christelle@gmail.com',
         phone: '677001122',
         level: 'Terminale C',
@@ -23,11 +22,10 @@ export const useCourseRequests = () => {
       requestedDate: 'Sam. 28 juin 2026',
       requestedTime: '14h00',
       duration: 2,
-      message: 'Préparation examen blanc BAC, je veux revoir les intégrales et les probabilités.',
-      paymentMethod: 'MTN',
-      amount: 4000,
+      message: 'Préparation examen blanc BAC, intégrales et probabilités.',
       status: 'en_attente',
       createdAt: '2026-06-25',
+      estimatedAmount: 4000, // 2000 FCFA/h × 2h — indicatif
     },
     {
       id: 'r2',
@@ -45,10 +43,9 @@ export const useCourseRequests = () => {
       requestedTime: '16h00',
       duration: 1.5,
       message: 'Révision des dérivées et fonctions.',
-      paymentMethod: 'Orange',
-      amount: 3000,
       status: 'en_attente',
       createdAt: '2026-06-25',
+      estimatedAmount: 3000, // 2000 × 1.5h — indicatif
     },
     {
       id: 'r3',
@@ -66,10 +63,9 @@ export const useCourseRequests = () => {
       requestedTime: '10h00',
       duration: 2,
       message: 'Soutien BAC, fonctions et suites numériques.',
-      paymentMethod: 'MTN',
-      amount: 4000,
       status: 'en_attente',
       createdAt: '2026-06-24',
+      estimatedAmount: 4000,
     },
     {
       id: 'r4',
@@ -86,81 +82,51 @@ export const useCourseRequests = () => {
       requestedDate: 'Lun. 23 juin 2026',
       requestedTime: '16h00',
       duration: 2,
-      message: 'Cours de révision avant l\'examen.',
-      paymentMethod: 'MTN',
-      amount: 4000,
+      message: 'Cours de révision avant examen.',
       status: 'accepte',
       createdAt: '2026-06-20',
-    },
-    {
-      id: 'r5',
-      reference: 'REQ-2026-005',
-      student: {
-        id: 's5',
-        name: 'Sophie Nguena',
-        email: 'sophie@gmail.com',
-        phone: '699112233',
-        level: 'Première C',
-        quartier: 'Bafoussam Road',
-      },
-      subject: 'Mathématiques',
-      requestedDate: 'Ven. 20 juin 2026',
-      requestedTime: '15h00',
-      duration: 2,
-      message: 'Préparation DS de mathématiques.',
-      paymentMethod: 'Orange',
-      amount: 4000,
-      status: 'refuse',
-      createdAt: '2026-06-18',
+      estimatedAmount: 4000,
     },
   ]);
 
-  // Demande sélectionnée pour le drawer détail
   const [selectedRequest, setSelectedRequest] =
     useState<CourseRequestDetail | null>(null);
-
-  // Filtres actifs
   const [filters, setFilters] = useState<RequestFilters>({
     search: '', status: 'TOUS',
   });
 
-  // Filtrage local
   const filteredRequests = requests.filter(r => {
     const matchSearch =
       r.student.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-      r.reference.toLowerCase().includes(filters.search.toLowerCase()) ||
-      r.subject.toLowerCase().includes(filters.search.toLowerCase());
+      r.reference.toLowerCase().includes(filters.search.toLowerCase());
     const matchStatus =
       filters.status === 'TOUS' || r.status === filters.status;
     return matchSearch && matchStatus;
   });
 
-  // Accepter une demande (mock)
   const handleAccept = (id: string) => {
     setRequests(prev => prev.map(r =>
       r.id === id ? { ...r, status: 'accepte' } : r
     ));
     setSelectedRequest(null);
-    // → remplacer par courseRequestService.acceptRequest(id)
   };
 
-  // Refuser une demande (mock)
   const handleRefuse = (id: string) => {
     setRequests(prev => prev.map(r =>
       r.id === id ? { ...r, status: 'refuse' } : r
     ));
     setSelectedRequest(null);
-    // → remplacer par courseRequestService.refuseRequest(id)
   };
 
-  // Statistiques rapides
+  // ── STATS ── sans montant total (paiement hors plateforme)
   const stats = {
     enAttente: requests.filter(r => r.status === 'en_attente').length,
     acceptees: requests.filter(r => r.status === 'accepte').length,
     refusees: requests.filter(r => r.status === 'refuse').length,
-    totalMontant: requests
+    // Montant estimatif uniquement pour information
+    estimatedTotal: requests
       .filter(r => r.status === 'accepte')
-      .reduce((sum, r) => sum + r.amount, 0),
+      .reduce((sum, r) => sum + r.estimatedAmount, 0),
   };
 
   return {

@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useSubscription } from '../../hooks/useSubscription';
 
 const links = [
   { label: '📊 Tableau de bord',    path: '/repetiteur/dashboard' },
@@ -8,17 +9,18 @@ const links = [
   { label: '💬 Messagerie',         path: '/repetiteur/messagerie' },
   { label: '⭐ Mes avis',           path: '/repetiteur/avis' },
   { label: '💰 Mes revenus',        path: '/repetiteur/revenus' },
+  { label: '💳 Mon abonnement',     path: '/repetiteur/abonnement' },
   { label: '⚙️ Paramètres',         path: '/repetiteur/parametres' },
-  { label: '💳 Mon abonnement', path: '/repetiteur/abonnement' },
 ];
 
 const TutorSidebar = () => {
   const navigate = useNavigate();
+  const { subscription } = useSubscription();
 
   return (
     <aside className="w-56 bg-[#1a2744] min-h-screen flex flex-col flex-shrink-0">
 
-      {/* Profil répétiteur */}
+      {/* Profil */}
       <div className="p-5 border-b border-blue-800">
         <div className="w-12 h-12 rounded-full bg-yellow-400
                         flex items-center justify-center text-xl mb-3">
@@ -26,6 +28,21 @@ const TutorSidebar = () => {
         </div>
         <p className="text-white font-bold text-sm">M. Kamga Eric</p>
         <p className="text-blue-300 text-xs">Répétiteur · Mathématiques</p>
+        {/* ✅ NOUVEAU : badge statut abonnement */}
+        <div className="mt-2">
+          <span className={`text-xs font-bold px-2 py-0.5 rounded-full
+            ${subscription.status === 'active'
+              ? 'bg-green-500 text-white'
+              : subscription.status === 'trial'
+                ? 'bg-blue-500 text-white'
+                : 'bg-red-500 text-white'
+            }`}>
+            {subscription.status === 'active' ? '✅ Abonné'
+              : subscription.status === 'trial'
+                ? `🎁 Essai (${subscription.daysRemaining}j)`
+                : '🚫 Suspendu'}
+          </span>
+        </div>
       </div>
 
       {/* Navigation */}
@@ -60,7 +77,6 @@ const TutorSidebar = () => {
           💬 Messages
         </button>
         <button
-          onClick={() => {/* logout */}}
           className="flex-1 bg-yellow-400 hover:bg-yellow-500
                      text-gray-900 text-xs font-bold py-2 rounded-lg
                      cursor-pointer transition-colors"

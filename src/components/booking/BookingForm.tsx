@@ -4,6 +4,8 @@ interface Props {
   formData: BookingFormData;
   onChange: (data: BookingFormData) => void;
   error: string;
+  tutorPhone: string;       // numéro du répétiteur
+  hourlyPrice: number;      // tarif pour info
 }
 
 const subjects = [
@@ -18,11 +20,15 @@ const durations = [
   { label: '3h', value: 3 },
 ];
 
-// Formulaire détails de la demande + moyen de paiement
-const BookingForm = ({ formData, onChange, error }: Props) => (
+// Formulaire demande de cours
+// ❌ SUPPRIMÉ : section moyen de paiement
+// ✅ AJOUTÉ : info paiement direct
+const BookingForm = ({
+  formData, onChange, error, tutorPhone, hourlyPrice
+}: Props) => (
   <div className="flex flex-col gap-4">
 
-    {/* Section détails de la demande */}
+    {/* Détails de la demande */}
     <div className="bg-white rounded-xl shadow-sm p-5">
       <h3 className="font-bold text-gray-700 mb-4">
         📝 Détails de la demande
@@ -49,7 +55,7 @@ const BookingForm = ({ formData, onChange, error }: Props) => (
           </select>
         </div>
 
-        {/* Durée souhaitée */}
+        {/* Durée */}
         <div>
           <label className="text-xs text-gray-500 font-semibold
                             uppercase mb-1 block">
@@ -57,7 +63,9 @@ const BookingForm = ({ formData, onChange, error }: Props) => (
           </label>
           <select
             value={formData.duration}
-            onChange={e => onChange({ ...formData, duration: Number(e.target.value) })}
+            onChange={e => onChange({
+              ...formData, duration: Number(e.target.value)
+            })}
             className="w-full border border-gray-200 rounded-lg
                        px-3 py-2 text-sm focus:outline-none
                        focus:ring-2 focus:ring-blue-300"
@@ -82,14 +90,14 @@ const BookingForm = ({ formData, onChange, error }: Props) => (
           type="text"
           value={formData.studentName}
           onChange={e => onChange({ ...formData, studentName: e.target.value })}
-          placeholder="Nom de l'élève (si différent de vous)"
+          placeholder="Nom de l'élève"
           className="w-full border border-gray-200 rounded-lg
                      px-3 py-2 text-sm focus:outline-none
                      focus:ring-2 focus:ring-blue-300"
         />
       </div>
 
-      {/* Message optionnel */}
+      {/* Message */}
       <div className="mt-4">
         <label className="text-xs text-gray-500 font-semibold
                           uppercase mb-1 block">
@@ -99,7 +107,7 @@ const BookingForm = ({ formData, onChange, error }: Props) => (
         <textarea
           value={formData.message}
           onChange={e => onChange({ ...formData, message: e.target.value })}
-          placeholder="Ex : nous aimerions revoir le chapitre sur les intégrales avant le BAC blanc."
+          placeholder="Ex : je voudrais revoir les intégrales avant le BAC blanc."
           rows={3}
           className="w-full border border-gray-200 rounded-lg
                      px-3 py-2 text-sm focus:outline-none
@@ -108,52 +116,54 @@ const BookingForm = ({ formData, onChange, error }: Props) => (
       </div>
     </div>
 
-    {/* Section moyen de paiement */}
+    {/* ✅ INFO PAIEMENT DIRECT — remplace la section paiement */}
     <div className="bg-white rounded-xl shadow-sm p-5">
-      <h3 className="font-bold text-gray-700 mb-4">
-        💰 Moyen de paiement
+      <h3 className="font-bold text-gray-700 mb-3">
+        💰 Paiement du cours
       </h3>
 
-      <div className="grid grid-cols-2 gap-3">
-
-        {/* MTN Mobile Money */}
-        <button
-          onClick={() => onChange({ ...formData, paymentMethod: 'MTN' })}
-          className={`flex items-center justify-center gap-2
-                      border-2 rounded-xl py-4 font-bold text-sm
-                      cursor-pointer transition-all
-                      ${formData.paymentMethod === 'MTN'
-                        ? 'border-[#1a2744] bg-[#1a2744] text-white'
-                        : 'border-gray-200 text-gray-700 hover:border-blue-300'
-                      }`}
-        >
-          <span className="text-lg">📱</span>
-          MTN Mobile Money
-        </button>
-
-        {/* Orange Money */}
-        <button
-          onClick={() => onChange({ ...formData, paymentMethod: 'Orange' })}
-          className={`flex items-center justify-center gap-2
-                      border-2 rounded-xl py-4 font-bold text-sm
-                      cursor-pointer transition-all
-                      ${formData.paymentMethod === 'Orange'
-                        ? 'border-orange-500 bg-orange-500 text-white'
-                        : 'border-gray-200 text-gray-700 hover:border-orange-300'
-                      }`}
-        >
-          <span className="text-lg text-orange-400">🟠</span>
-          Orange Money
-        </button>
+      {/* Tarif estimatif */}
+      <div className="bg-gray-50 rounded-xl p-4 mb-4">
+        <div className="flex justify-between items-center">
+          <span className="text-sm text-gray-600">
+            Tarif estimatif ({formData.duration}h)
+          </span>
+          <span className="font-bold text-[#1a2744] text-lg">
+            {(hourlyPrice * formData.duration).toLocaleString()} FCFA
+          </span>
+        </div>
+        <p className="text-xs text-gray-400 mt-1">
+          Basé sur {hourlyPrice.toLocaleString()} FCFA/heure
+        </p>
       </div>
 
-      {/* Note paiement différé */}
-      <p className="text-xs text-gray-400 mt-3 text-center">
-        Le paiement est débité uniquement après confirmation du répétiteur.
-      </p>
+      {/* Explication modèle paiement direct */}
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+        <p className="text-sm font-bold text-blue-800 mb-2">
+          📱 Comment payer votre répétiteur ?
+        </p>
+        <div className="flex flex-col gap-2 text-xs text-blue-700">
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0">1️⃣</span>
+            <span>Envoyez votre demande de cours en cliquant sur le bouton.</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0">2️⃣</span>
+            <span>Le répétiteur confirme votre demande sous 24h.</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="flex-shrink-0">3️⃣</span>
+            <span>
+              Payez directement via MTN MoMo ou Orange Money au :
+              <br />
+              <strong className="text-blue-900 text-sm">📱 {tutorPhone}</strong>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    {/* Message d'erreur global */}
+    {/* Message d'erreur */}
     {error && (
       <div className="bg-red-50 border border-red-200 rounded-lg
                       px-4 py-3 text-sm text-red-700">

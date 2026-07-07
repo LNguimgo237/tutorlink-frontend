@@ -5,7 +5,7 @@ import UpcomingCoursesTable from '../../components/student/UpcomingCoursesTable'
 import MyGroupsTable from '../../components/student/MyGroupsTable';
 import SubjectProgressPanel from '../../components/student/SubjectProgressPanel';
 import RecentActivityPanel from '../../components/student/RecentActivityPanel';
-
+import ReservationDetailModal from '../../components/student/reservations/ReservationDetailModal';
 const StudentDashboardPage = () => {
   const navigate = useNavigate();
   const {
@@ -26,7 +26,7 @@ const StudentDashboardPage = () => {
       {/* Message de bienvenue */}
       <div>
         <h2 className="text-2xl font-bold text-gray-800">
-          Bonjour Junior 👋
+          Bonjour Leonel 👋
         </h2>
         <p className="text-gray-400 mt-1">
           Voici un aperçu de votre parcours scolaire ce mois-ci.

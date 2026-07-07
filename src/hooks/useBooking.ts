@@ -1,25 +1,23 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  BookingTutor, TimeSlot, BookingFormData
-} from '../types/booking.types';
+import { BookingTutor, TimeSlot, BookingFormData } from '../types/booking.types';
 
 export const useBooking = (tutorId?: string) => {
   const navigate = useNavigate();
 
-  // ── DONNÉES MOCK répétiteur ──
+  // ── RÉPÉTITEUR MOCK ── ajout du numéro de téléphone
   const [tutor] = useState<BookingTutor>({
     id: tutorId || 't1',
-    name: 'M. Kenfack Leo',
+    name: 'M. Guena Paul',
     subject: 'Mathématiques',
     level: 'Terminale C/D',
     quartier: 'Centre Dschang',
     rating: 4.9,
     reviewCount: 87,
     hourlyPrice: 2000,
+    phone: '677 00 11 22',  // ← pour paiement direct MTN/Orange
   });
 
-  // ── CRÉNEAUX DISPONIBLES MOCK ──
   const [slots] = useState<TimeSlot[]>([
     { id: 's1', day: 'LUN', startTime: '16h', endTime: '18h', available: true },
     { id: 's2', day: 'LUN', startTime: '18h', endTime: '20h', available: false },
@@ -33,57 +31,41 @@ export const useBooking = (tutorId?: string) => {
     { id: 's10', day: 'SAM', startTime: '14h', endTime: '16h', available: true },
   ]);
 
-  // État du formulaire
+  // ❌ SUPPRIMÉ : paymentMethod dans le formData
   const [formData, setFormData] = useState<BookingFormData>({
     selectedSlot: null,
     subject: 'Mathématiques',
     duration: 2,
     studentName: '',
     message: '',
-    paymentMethod: null,
   });
 
-  // Message d'erreur
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  // Sélectionner un créneau
   const handleSelectSlot = (slot: TimeSlot) => {
     if (!slot.available) return;
     setFormData(prev => ({ ...prev, selectedSlot: slot }));
     setError('');
   };
 
-  // Changer le moyen de paiement
-  const handleSelectPayment = (method: 'MTN' | 'Orange') => {
-    setFormData(prev => ({ ...prev, paymentMethod: method }));
-    setError('');
-  };
+  // Calcul indicatif du montant — pour info seulement
+  const estimatedAmount = tutor.hourlyPrice * formData.duration;
 
-  // Calculer le total
-  const total = tutor.hourlyPrice * formData.duration;
-
-  // Soumettre la réservation
+  // Soumettre la demande de cours (sans paiement plateforme)
   const handleSubmit = async () => {
-    // Validations
     if (!formData.selectedSlot) {
       setError('Sélectionnez un créneau avant de confirmer.');
       return;
     }
-    if (!formData.paymentMethod) {
-      setError('Choisissez un moyen de paiement.');
-      return;
-    }
-
     try {
       setLoading(true);
       // → remplacer par bookingService.createReservation(tutor.id, formData)
-      console.log('Réservation:', formData);
-
-      // Simulation succès → redirige vers dashboard
-      setTimeout(() => {
-        navigate('/booking/confirm/:bookingId');
-      }, 1000);
+      console.log('Demande de cours:', formData);
+      await new Promise(res => setTimeout(res, 800));
+      setSubmitted(true);
+      setTimeout(() => navigate('/dashboard'), 1500);
     } catch {
       setError('Une erreur est survenue. Réessayez.');
     } finally {
@@ -93,7 +75,7 @@ export const useBooking = (tutorId?: string) => {
 
   return {
     tutor, slots, formData, setFormData,
-    error, loading, total,
-    handleSelectSlot, handleSelectPayment, handleSubmit,
+    error, loading, submitted, estimatedAmount,
+    handleSelectSlot, handleSubmit,
   };
 };

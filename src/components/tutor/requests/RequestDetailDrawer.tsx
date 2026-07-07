@@ -12,6 +12,7 @@ interface Props {
 const RequestDetailDrawer = ({
   request: r, onClose, onAccept, onRefuse
 }: Props) => (
+
   <div
     onClick={onClose}
     className="fixed inset-0 bg-black/50 z-50 flex justify-end"
@@ -122,7 +123,7 @@ const RequestDetailDrawer = ({
             <div className="flex justify-between">
               <span className="text-xs text-gray-500">Montant</span>
               <span className="text-base font-bold text-blue-900">
-                {r.amount.toLocaleString()} FCFA
+                {(r?.estimatedAmount ?? 0).toLocaleString()} FCFA
               </span>
             </div>
           </div>
