@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+
+/*import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -18,4 +19,4 @@ export const AppRouter = () => (
       <Route path="*"         element={<NotFoundPage />} />
     </Routes>
   </Suspense>
-);
+);*/

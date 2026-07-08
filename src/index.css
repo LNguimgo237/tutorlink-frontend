@@ -1,1 +1,108 @@
+/* Tailwind v4 — syntaxe officielle */
 @import "tailwindcss";
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+
+/* Tokens de design TutorLink */
+@theme {
+  --color-primary:       #2563eb;
+  --color-primary-dark:  #1d4ed8;
+  --color-primary-light: #eff6ff;
+  --color-accent:        #f59e0b;
+  --color-navy:          #1a2744;
+  --color-ai-from:       #8b5cf6;
+  --color-ai-to:         #4f46e5;
+  --color-text-dark:     #0f172a;
+  --color-text-mid:      #334155;
+  --color-text-light:    #64748b;
+  --color-bg-light:      #f0f7ff;
+  --color-border-col:    #e2e8f0;
+
+  --font-heading: 'Sora', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  --radius-card: 14px;
+  --radius-sm:   8px;
+
+  --shadow-card:    0 4px 24px rgba(37, 99, 235, 0.08);
+  --shadow-card-md: 0 8px 40px rgba(37, 99, 235, 0.13);
+
+  --height-navbar:  72px;
+  --spacing-navbar: 72px;
+}
+
+/* Base */
+@layer base {
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--font-body); color: var(--color-text-dark); background: white; }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+}
+
+/* Composants réutilisables */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full
+           font-heading text-sm font-semibold bg-primary text-white
+           border-2 border-transparent transition-all duration-200
+           cursor-pointer whitespace-nowrap;
+  }
+  .btn-primary:hover {
+    @apply bg-primary-dark -translate-y-0.5
+           shadow-[0_8px_24px_rgba(37,99,235,0.35)];
+  }
+  .btn-outline-white {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full
+           font-heading text-sm font-semibold bg-transparent text-white
+           border-2 border-white/70 transition-all duration-200 cursor-pointer;
+  }
+  .btn-outline-white:hover { @apply bg-white/15 border-white; }
+
+  .btn-cta {
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full
+           font-heading text-base font-semibold bg-white text-primary
+           border-2 border-transparent transition-all duration-200 cursor-pointer;
+  }
+  .btn-cta:hover { @apply -translate-y-0.5 shadow-[0_8px_32px_rgba(0,0,0,0.15)]; }
+
+  .section-eyebrow {
+    @apply font-heading text-xs font-bold tracking-widest
+           text-primary uppercase text-center mb-3;
+  }
+  .section-title {
+    @apply font-heading font-extrabold text-text-dark text-center leading-tight mb-3;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  }
+  .section-sub {
+    @apply text-text-light text-center max-w-xl mx-auto mb-14;
+    font-size: 1.05rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeUp { animation: fadeUp 0.9s ease both; }
+
+@keyframes heroBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+.animate-hero-bounce { animation: heroBounce 2s ease infinite; }
+
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0);    opacity: 0.4; }
+  30%           { transform: translateY(-5px); opacity: 1;   }
+}
+
+/* Dark mode */
+.dark body { background-color: #0f172a; color: #f1f5f9; }
+
+/* Scrollbar */
+.overflow-y-auto::-webkit-scrollbar        { width: 4px; }
+.overflow-y-auto::-webkit-scrollbar-track  { background: transparent; }
+.overflow-y-auto::-webkit-scrollbar-thumb  { background: #e2e8f0; border-radius: 99px; }
+.overflow-y-auto::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+.dark .overflow-y-auto::-webkit-scrollbar-thumb { background: #334155; }

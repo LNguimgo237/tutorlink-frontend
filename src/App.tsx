@@ -1,25 +1,12 @@
-import { BrowserRouter } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Toaster } from 'react-hot-toast';
+/**
+ * App.tsx  (M2 - Willer Pegasus)
+ * --------------------------------
+ * Point d'entree de l'application.
+ * Monte le routeur central AppRouter qui gere toutes les routes.
+ */
 
-const queryClient = new QueryClient();
+import AppRouter from './router/AppRouter'
 
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <div className="min-h-screen bg-gray-50">
-          <h1 className="text-3xl font-bold text-center p-8 text-blue-900">
-            TutorLink 🎓
-          </h1>
-          <p className="text-center text-gray-500">
-            Plateforme de soutien scolaire
-          </p>
-        </div>
-        <Toaster position="top-right" />
-      </BrowserRouter>
-    </QueryClientProvider>
-  );
+export default function App() {
+  return <AppRouter />
 }
-
-export default App;
