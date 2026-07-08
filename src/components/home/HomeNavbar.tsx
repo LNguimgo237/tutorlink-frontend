@@ -25,7 +25,7 @@ const HomeNavbar = () => (
       </Link>
       <a href="tarifs"
         className="text-white/80 hover:text-white transition-colors">
-        Comment ça marche
+        Detail
       </a>
       <a href="#avantages"
         className="text-white/80 hover:text-white transition-colors">

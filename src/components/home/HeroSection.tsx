@@ -36,13 +36,13 @@ const HeroSection = () => {
   bg-[url('/src/assets/hero-bg.jpg')]"
 />
       {/* Overlay dégradé pour lisibilité du texte */}
-      <div className="absolute inset-0
-                      bg-gradient-to-b from-[#1a2744]/90
-                      via-[#1a2744]/60 to-[#1a2744]/90" />
+     <div className="absolute inset-0
+                      bg-gradient-to-b from-[#1a2744]/50 
+                      via-[#1a2744]/60 to-[#1a2744]/50" />
 
       {/* Cercles décoratifs animés en arrière-plan */}
       <div className="absolute top-20 left-10 w-64 h-64
-                      rounded-full bg-yellow-400/5
+                      rounded-full bg-yellow-400/5 
                       blur-3xl pointer-events-none" />
       <div className="absolute bottom-20 right-10 w-96 h-96
                       rounded-full bg-blue-400/5

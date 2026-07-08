@@ -92,7 +92,7 @@ const SearchPage: React.FC = () => {
               to="/inscription"
               className="
                 bg-[#f5a623] text-[#1a2744] font-bold text-sm
-                px-5 py-2 rounded-lg hover:bg-[#e09415]
+                px-5 py-2 rounded-lg hover:bg-[#bda57d]
                 transition-colors
               "
             >

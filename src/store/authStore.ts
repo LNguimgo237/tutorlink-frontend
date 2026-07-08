@@ -1,13 +1,18 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { User } from '@/types/user.types';
+import { AuthUser, UserRole } from '../types/auth.types';
 
 interface AuthStore {
-  user: User | null;
+  // État
+  user: AuthUser | null;
   token: string | null;
   isAuthenticated: boolean;
-  setAuth: (token: string, user: User) => void;
+  role: UserRole | null;
+
+  // Actions
+  setAuth: (user: AuthUser, token: string) => void;
   logout: () => void;
+  updateUser: (user: Partial<AuthUser>) => void;
 }
 
 export const useAuthStore = create<AuthStore>()(
@@ -16,9 +21,38 @@ export const useAuthStore = create<AuthStore>()(
       user: null,
       token: null,
       isAuthenticated: false,
-      setAuth: (token, user) => set({ token, user, isAuthenticated: true }),
-      logout: () => set({ token: null, user: null, isAuthenticated: false }),
+      role: null,
+
+      // Appelé après connexion réussie
+      setAuth: (user, token) => set({
+        user,
+        token,
+        isAuthenticated: true,
+        role: user.role,
+      }),
+
+      // Déconnexion — efface tout
+      logout: () => set({
+        user: null,
+        token: null,
+        isAuthenticated: false,
+        role: null,
+      }),
+
+      // Mise à jour du profil sans déconnecter
+      updateUser: (updates) => set(state => ({
+        user: state.user ? { ...state.user, ...updates } : null,
+      })),
     }),
-    { name: 'tutorlink-auth' }
+    {
+      name: 'tutorlink-auth',  // clé localStorage
+      // Ne persiste que le token et le user
+      partialize: (state) => ({
+        user: state.user,
+        token: state.token,
+        isAuthenticated: state.isAuthenticated,
+        role: state.role,
+      }),
+    }
   )
 );

@@ -9,7 +9,7 @@ import StudentLayout from '../layouts/StudentLayout';
 import StudentProtectedRoute from './StudentProtectedRoute';
 
 const HomePage       = lazy(() => import('@/pages/public/HomePage'));
-const LoginPage      = lazy(() => import('@/pages/auth/LoginPage'));
+const LoginPage      = lazy(() => import('@/pages/public/LoginPage'));
 const RegisterPage   = lazy(() => import('@/pages/auth/RegisterPage'));
 const SearchPage     = lazy(() => import('@/pages/search/SearchPage'));
 const NotFoundPage   = lazy(() => import('@/pages/NotFoundPage'));
@@ -42,7 +42,6 @@ const StudentReservationsPage = lazy(
 const StudentPaymentsPage = lazy(() => import('../pages/student/StudentPaymentsPage'));
 const StudentSettingsPage = lazy(() => import('../pages/student/StudentSettingsPage'));
 const TutorProfilePage = lazy(() => import('../pages/public/TutorProfilePage'));
-const UserLoginPage = lazy(() => import("../pages/public/UserLoginPage"));
 const UserRegisterPage = lazy(() => import('../pages/public/UserRegisterPage'));
 const SearchsPage = lazy(() => import("../pages/public/SearchsPage"));
 const BookingConfirmPage = lazy(
@@ -56,6 +55,7 @@ const TutorGroupSubscriptionPage = lazy(
   () => import('../pages/tutor/TutorGroupSubscriptionPage')
 );
 const PricingPage = lazy(() => import("../pages/public/PricingPage"));
+const ForgotPasswordPage = lazy(() => import('../pages/public/ForgotPasswordPage'));
 
 
 
@@ -70,7 +70,7 @@ export const AppRouter = () => (
        <Route path="/groupes"       element={<GroupsPage />} />
       <Route path="/groupes/:id"   element={<GroupDetailPage />} />
       <Route path="/repetiteurs/:tutorId" element={<TutorProfilePage />} />
-      <Route path="/connexion" element={<UserLoginPage />} />
+      <Route path="/connexion"              element={<LoginPage />} />
       <Route path="/inscription" element={<UserRegisterPage />} />
       <Route path="/repetiteurs" element={<SearchsPage />} />
       <Route path="/" element={<HomePage />} />
@@ -80,6 +80,7 @@ export const AppRouter = () => (
   element={<BookingConfirmPage />}
 />
 <Route path="/tarifs" element={<PricingPage />} />
+<Route path="/mot-de-passe-oublie"   element={<ForgotPasswordPage />} />
 
       {/* Routes admin */}
       <Route path="/admin/login" element={<AdminLoginPage />} />

@@ -250,12 +250,15 @@ const PricingPage: React.FC = () => {
                       transition-colors duration-300">
 
         {/* ══ 1. HERO ══════════════════════════════════════════ */}
-        <section className="
+       {/* <section className="
           relative overflow-hidden
           bg-gradient-to-br from-[#1a2744] via-[#1a2744] to-[#0d1a33]
           dark:from-[#0a0f1e] dark:via-[#0d1a33] dark:to-[#060c17]
           pt-16 pb-24
-        ">
+        ">*/}
+        <section
+  className="absolute inset-0 bg-cover bg-center bg-no-repeat
+  bg-[url('/src/assets/hero-bg.jpg')]">
           {/* Grille décorative en arrière-plan */}
           <div className="absolute inset-0 opacity-5"
                style={{

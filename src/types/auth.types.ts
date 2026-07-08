@@ -1,60 +1,46 @@
-// ============================================================
-// Types TypeScript pour l'authentification (page Connexion)
-// Définit les interfaces de connexion, utilisateur et session
-// ============================================================
+// Rôle de l'utilisateur connecté
+export type UserRole = 'ELEVE' | 'PARENT' | 'REPETITEUR' | 'ADMIN';
 
-// ── Rôles possibles d'un utilisateur ──────────────────────────
-export type UserRole = "STUDENT" | "PARENT" | "TUTOR" | "ADMIN";
-
-// ── Données saisies dans le formulaire de connexion ──────────
-export interface LoginFormData {
-  identifier: string;   // Email OU numéro de téléphone saisi par l'utilisateur
-  password: string;     // Mot de passe
-  rememberMe: boolean;  // Case "Se souvenir de moi"
+// Données renvoyées par le backend après connexion réussie
+export interface AuthResponse {
+  token: string;           // JWT signé par le backend
+  refreshToken?: string;   // optionnel si implémenté
+  user: AuthUser;
 }
 
-// ── Utilisateur connecté retourné par l'API ───────────────────
+// Profil utilisateur minimal stocké dans le store
 export interface AuthUser {
-  id: string;             // Identifiant unique de l'utilisateur
-  firstName: string;      // Prénom
-  lastName: string;       // Nom de famille
-  email: string;          // Adresse email
-  phone: string;          // Numéro de téléphone
-  role: UserRole;         // Rôle déterminant la redirection post-login
-  district: string;       // Quartier à Dschang
-  avatarUrl?: string;     // Photo de profil (optionnel)
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  role: UserRole;
+  avatar?: string;
+  isVerified: boolean;     // compte validé par l'admin (répétiteur)
+  subscriptionStatus?: 'trial' | 'active' | 'suspended'; // répétiteur
 }
 
-// ── Réponse complète de l'API après connexion réussie ────────
-export interface LoginResponse {
-  token: string;          // JWT à stocker pour les requêtes futures
-  refreshToken: string;   // Token de rafraîchissement
-  user: AuthUser;         // Informations de l'utilisateur connecté
-  expiresIn: number;      // Durée de validité du token en secondes
+// Données du formulaire de connexion
+export interface LoginCredentials {
+  emailOrPhone: string;    // email OU numéro de téléphone
+  password: string;
+  rememberMe: boolean;
 }
 
-// ── Payload envoyé pour la demande de réinitialisation ───────
-export interface ForgotPasswordPayload {
-  identifier: string;     // Email ou téléphone pour recevoir le code
+// Réponse Google OAuth
+export interface GoogleAuthResponse {
+  credential: string;      // ID token Google
 }
 
-// ── Erreur de connexion structurée ────────────────────────────
-export interface LoginError {
-  code: LoginErrorCode;   // Code technique de l'erreur
-  message: string;        // Message affiché à l'utilisateur
+// Erreur d'authentification
+export interface AuthError {
+  code:
+    | 'INVALID_CREDENTIALS'    // email/mot de passe incorrect
+    | 'ACCOUNT_SUSPENDED'      // compte suspendu
+    | 'ACCOUNT_PENDING'        // répétiteur en attente validation
+    | 'SUBSCRIPTION_EXPIRED'   // abonnement répétiteur expiré
+    | 'NETWORK_ERROR'          // serveur indisponible
+    | 'GOOGLE_AUTH_FAILED';    // échec connexion Google
+  message: string;
 }
-
-export type LoginErrorCode =
-  | "INVALID_CREDENTIALS"  // Email/téléphone ou mot de passe incorrect
-  | "ACCOUNT_SUSPENDED"    // Compte suspendu par l'admin
-  | "ACCOUNT_NOT_VERIFIED" // Répétiteur en attente de validation
-  | "NETWORK_ERROR"        // Erreur réseau / serveur injoignable
-  | "UNKNOWN";             // Erreur non identifiée
-
-// ── Mapping des rôles vers leur route de redirection ──────────
-export const ROLE_REDIRECT_MAP: Record<UserRole, string> = {
-  STUDENT: "/eleve/dashboard",
-  PARENT:  "/eleve/dashboard",
-  TUTOR:   "/repetiteur/dashboard",
-  ADMIN:   "/admin/dashboard",
-};
