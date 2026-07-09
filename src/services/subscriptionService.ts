@@ -16,7 +16,19 @@ const subscriptionService = {
     const res = await api.get('/tutor/subscription/payments');
     return res.data;
   },
+// À AJOUTER dans src/services/subscriptionService.ts, dans l'objet subscriptionService
 
+  // GET /groups/:groupId/subscription — statut abonnement du groupe
+  getGroupSubscription: async (groupId: string) => {
+    const res = await api.get(`/groups/${groupId}/subscription`);
+    return res.data;
+  },
+
+  // POST /groups/:groupId/subscription/pay — payer l'abonnement du groupe
+  payGroupSubscription: async (groupId: string, operator: SubscriptionOperator) => {
+    const res = await api.post(`/groups/${groupId}/subscription/pay`, { operator });
+    return res.data;
+  },
   // POST /tutor/subscription/pay — payer l'abonnement mensuel
   // → Backend initie paiement MTN MoMo ou Orange Money
   // → Backend active le compte pour 30 jours supplémentaires
@@ -31,7 +43,9 @@ const subscriptionService = {
   toggleAutoRenew: async (enabled: boolean) => {
     const res = await api.put('/tutor/subscription/auto-renew', {
       enabled
+
     });
+
     return res.data;
   },
 
@@ -40,6 +54,7 @@ const subscriptionService = {
     const res = await api.get('/tutor/subscription/notifications');
     return res.data;
   },
+  
 };
 
 export default subscriptionService;

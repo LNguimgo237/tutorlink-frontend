@@ -1,71 +1,70 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import studentSettingsService from '../services/studentSettingsService';
 import {
   SettingsSection, StudentProfile,
   NotificationPreferences, PasswordChangeData,
   PrivacySettings
 } from '../types/studentSettings.types';
 
+const EMPTY_PROFILE: StudentProfile = {
+  name: '', email: '', phone: '', level: '', quartier: '', bio: '',
+};
+const DEFAULT_NOTIF: NotificationPreferences = {
+  emailReservation: true, emailMessage: true,
+  smsReminder: true, smsPayment: true, pushNotifications: false,
+};
+const DEFAULT_PRIVACY: PrivacySettings = {
+  showProfileToTutors: true, showInReviews: true, allowDataExport: true,
+};
+
 export const useStudentSettings = () => {
+  const [activeSection, setActiveSection] = useState<SettingsSection>('profil');
 
-  // Section active
-  const [activeSection, setActiveSection] =
-    useState<SettingsSection>('profil');
+  const [profile, setProfile] = useState<StudentProfile>(EMPTY_PROFILE);
+  const [notifPrefs, setNotifPrefs] = useState<NotificationPreferences>(DEFAULT_NOTIF);
+  const [privacy, setPrivacy] = useState<PrivacySettings>(DEFAULT_PRIVACY);
 
-  // ── PROFIL MOCK ──
-  const [profile, setProfile] = useState<StudentProfile>({
-    name: 'Junior Nanfack',
-    email: 'j.nanfack@gmail.com',
-    phone: '677001122',
-    level: 'Terminale D',
-    quartier: 'Centre Dschang',
-    bio: 'Élève en Terminale D, je vise le BAC D avec mention.',
-  });
+  useEffect(() => {
+    studentSettingsService.getProfile().then(setProfile).catch(() => {});
+    studentSettingsService.getNotificationPrefs().then(setNotifPrefs).catch(() => {});
+    studentSettingsService.getPrivacySettings().then(setPrivacy).catch(() => {});
+  }, []);
 
-  // ── MOT DE PASSE ──
   const [passwordData, setPasswordData] = useState<PasswordChangeData>({
     currentPassword: '', newPassword: '', confirmPassword: '',
   });
   const [passwordError, setPasswordError] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState(false);
-
-  // ── NOTIFICATIONS MOCK ──
-  const [notifPrefs, setNotifPrefs] = useState<NotificationPreferences>({
-    emailReservation: true,
-    emailMessage: true,
-    smsReminder: true,
-    smsPayment: true,
-    pushNotifications: false,
-  });
-
-  // ── CONFIDENTIALITÉ MOCK ──
-  const [privacy, setPrivacy] = useState<PrivacySettings>({
-    showProfileToTutors: true,
-    showInReviews: true,
-    allowDataExport: true,
-  });
-
-  // Indicateur sauvegarde
-  const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-
-  // Modal suppression compte
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  // Sauvegarder le profil
-  const handleSaveProfile = async () => {
-    setSaving(true);
-    // → remplacer par studentSettingsService.updateProfile(profile)
-    await new Promise(res => setTimeout(res, 800));
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
-  };
+  const saveProfileMutation = useMutation({
+    mutationFn: () => studentSettingsService.updateProfile(profile),
+    onSuccess: () => {
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    },
+  });
 
-  // Changer le mot de passe
-  const handleChangePassword = async () => {
+  const changePasswordMutation = useMutation({
+    mutationFn: () => studentSettingsService.changePassword(passwordData),
+    onSuccess: () => {
+      setPasswordSuccess(true);
+      setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+    },
+    onError: () => setPasswordError("Mot de passe actuel incorrect."),
+  });
+
+  const notifMutation = useMutation({ mutationFn: studentSettingsService.updateNotificationPrefs });
+  const privacyMutation = useMutation({ mutationFn: studentSettingsService.updatePrivacySettings });
+  const deleteAccountMutation = useMutation({ mutationFn: studentSettingsService.deleteAccount });
+
+  const handleSaveProfile = () => saveProfileMutation.mutate();
+
+  const handleChangePassword = () => {
     setPasswordError('');
     setPasswordSuccess(false);
-
     if (passwordData.newPassword.length < 8) {
       setPasswordError('Le mot de passe doit contenir au moins 8 caractères.');
       return;
@@ -74,33 +73,27 @@ export const useStudentSettings = () => {
       setPasswordError('Les mots de passe ne correspondent pas.');
       return;
     }
+    changePasswordMutation.mutate();
+  };
 
-    setSaving(true);
-    // → remplacer par studentSettingsService.changePassword(passwordData)
-    await new Promise(res => setTimeout(res, 800));
-    setSaving(false);
-    setPasswordSuccess(true);
-    setPasswordData({
-      currentPassword: '', newPassword: '', confirmPassword: '',
+  const toggleNotifPref = (key: keyof NotificationPreferences) => {
+    setNotifPrefs(prev => {
+      const updated = { ...prev, [key]: !prev[key] };
+      notifMutation.mutate(updated);
+      return updated;
     });
   };
 
-  // Basculer une préférence de notification
-  const toggleNotifPref = (key: keyof NotificationPreferences) => {
-    setNotifPrefs(prev => ({ ...prev, [key]: !prev[key] }));
-    // → remplacer par studentSettingsService.updateNotificationPrefs(...)
-  };
-
-  // Basculer un paramètre de confidentialité
   const togglePrivacy = (key: keyof PrivacySettings) => {
-    setPrivacy(prev => ({ ...prev, [key]: !prev[key] }));
-    // → remplacer par studentSettingsService.updatePrivacySettings(...)
+    setPrivacy(prev => {
+      const updated = { ...prev, [key]: !prev[key] };
+      privacyMutation.mutate(updated);
+      return updated;
+    });
   };
 
-  // Supprimer le compte (mock)
   const handleDeleteAccount = () => {
-    console.log('Suppression du compte');
-    // → remplacer par studentSettingsService.deleteAccount()
+    deleteAccountMutation.mutate();
     setShowDeleteConfirm(false);
   };
 
@@ -110,7 +103,8 @@ export const useStudentSettings = () => {
     passwordData, setPasswordData,
     passwordError, passwordSuccess,
     notifPrefs, privacy,
-    saving, saved,
+    saving: saveProfileMutation.isPending || changePasswordMutation.isPending,
+    saved,
     showDeleteConfirm, setShowDeleteConfirm,
     handleSaveProfile, handleChangePassword,
     toggleNotifPref, togglePrivacy,

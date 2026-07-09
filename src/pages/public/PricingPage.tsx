@@ -238,6 +238,54 @@ const FaqItem: React.FC<{ q: string; a: string; defaultOpen?: boolean }> = ({
     </div>
   );
 };
+  {/* ── Navbar publique ─────────────────────────────────── */}
+      <header className="bg-[#1a2744] border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-6 py-4
+                        flex items-center justify-between">
+
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 flex-shrink-0">
+            <span className="text-[#f5a623] text-2xl">🎓</span>
+            <span className="font-bold text-xl text-white">
+              Tutor<span className="text-[#f5a623]">Link</span>
+            </span>
+          </Link>
+
+          {/* Navigation centrale */}
+          <nav className="hidden md:flex items-center gap-8">
+            <Link
+              to="/"
+              className="text-white/80 hover:text-white text-sm transition-colors"
+            >
+              Accueil
+            </Link>
+            <Link
+              to="/repetiteurs"
+              className="text-white font-semibold text-sm border-b-2
+                         border-[#f5a623] pb-0.5"
+            >
+              Répétiteurs
+            </Link>
+            <Link
+              to="/groupes"
+              className="text-white/80 hover:text-white text-sm transition-colors"
+            >
+              Groupes
+           </Link>
+          </nav>
+          <Link
+              to="/inscription"
+              className="
+                bg-[#f5a623] text-[#1a2744] font-bold text-sm
+                px-5 py-2 rounded-lg hover:bg-[#bda57d]
+                transition-colors
+              "
+            >
+              S'inscrire
+            </Link>
+          </div>
+      </header>
+
 
 // ════════════════════════════════════════════════════════════════
 // PAGE PRINCIPALE
@@ -249,16 +297,14 @@ const PricingPage: React.FC = () => {
       <div className="min-h-screen bg-white dark:bg-gray-900
                       transition-colors duration-300">
 
-        {/* ══ 1. HERO ══════════════════════════════════════════ */}
-       {/* <section className="
-          relative overflow-hidden
-          bg-gradient-to-br from-[#1a2744] via-[#1a2744] to-[#0d1a33]
-          dark:from-[#0a0f1e] dark:via-[#0d1a33] dark:to-[#060c17]
-          pt-16 pb-24
-        ">*/}
+      
         <section
   className="absolute inset-0 bg-cover bg-center bg-no-repeat
-  bg-[url('/src/assets/hero-bg.jpg')]">
+  bg-[url('/src/assets/hero-detail.jpg')]">
+   <div className="absolute inset-0
+                      bg-gradient-to-b from-[#1a2744]/50 
+                      via-[#1a2744]/60 to-[#1a2744]/50" />
+
           {/* Grille décorative en arrière-plan */}
           <div className="absolute inset-0 opacity-5"
                style={{
@@ -268,7 +314,7 @@ const PricingPage: React.FC = () => {
                  backgroundSize: "48px 48px",
                }}
           />
-
+         
           {/* Cercle décoratif doré */}
           <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full
                           bg-[#f5a623]/10 blur-3xl" />

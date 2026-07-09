@@ -5,7 +5,8 @@ import {
   BaseRegisterData, TutorRegisterData,
   TutorDocuments, DocumentPreview
 } from '../types/register.types';
-
+import registerService from '../services/registerService';
+import type { StudentRegisterData, TutorRegisterData as TutorRegisterPayload } from '../types/register.types';
 export const useRegister = () => {
   const navigate = useNavigate();
 
@@ -159,13 +160,21 @@ export const useRegister = () => {
   };
 
   // Soumettre le formulaire
+  // Soumettre le formulaire
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      // Simulation — remplacer par les vrais appels API
-      await new Promise(res => setTimeout(res, 1000));
+      if (role === 'ELEVE_PARENT') {
+        const payload: StudentRegisterData = { ...baseData, role: 'ELEVE_PARENT' };
+        await registerService.registerStudent(payload);
+      } else {
+        const payload: TutorRegisterPayload = { ...baseData, ...tutorData, role: 'REPETITEUR' };
+        await registerService.registerTutor(payload, documents);
+      }
       setSubmitted(true);
       setStep('confirmation');
+    } catch (err: any) {
+      setErrors({ submit: err?.response?.data?.message ?? "Une erreur est survenue. Réessayez." });
     } finally {
       setLoading(false);
     }

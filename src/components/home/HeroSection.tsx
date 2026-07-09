@@ -36,7 +36,7 @@ const HeroSection = () => {
   bg-[url('/src/assets/hero-bg.jpg')]"
 />
       {/* Overlay dégradé pour lisibilité du texte */}
-     <div className="absolute inset-0
+      <div className="absolute inset-0
                       bg-gradient-to-b from-[#1a2744]/50 
                       via-[#1a2744]/60 to-[#1a2744]/50" />
 

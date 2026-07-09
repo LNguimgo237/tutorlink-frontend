@@ -1,48 +1,38 @@
 import { useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import subscriptionService from '../services/subscriptionService';
 import { TutorSubscription, SubscriptionOperator } from '../types/subscription.types';
 
-// Hook abonnement pour un groupe spécifique
-// Le répétiteur admin du groupe gère cet abonnement
 export const useGroupSubscription = (groupId: string) => {
+  const queryClient = useQueryClient();
 
-  // ── ABONNEMENT GROUPE MOCK ──
-  const [subscription, setSubscription] = useState<TutorSubscription>({
-    id: `gsub-${groupId}`,
-    tutorId: 'me',
-    status: 'trial',
-    trialStartDate: '2026-06-10',
-    trialEndDate: '2026-07-10',
-    currentPeriodStart: '2026-06-10',
-    currentPeriodEnd: '2026-07-10',
-    monthlyPrice: 5000,   // ← 5000 FCFA pour les groupes
-    daysRemaining: 7,
-    isTrialPeriod: true,
-    autoRenew: false,
+  const { data: subscription } = useQuery<TutorSubscription>({
+    queryKey: ['group-subscription', groupId],
+    queryFn: () => subscriptionService.getGroupSubscription(groupId),
+    enabled: !!groupId,
+    staleTime: 60 * 1000,
   });
 
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handlePay = async (operator: SubscriptionOperator) => {
-    setLoading(true);
-    await new Promise(res => setTimeout(res, 1500));
-    setLoading(false);
-    setSuccess(true);
-    setSubscription(prev => ({
-      ...prev,
-      status: 'active',
-      isTrialPeriod: false,
-      daysRemaining: 30,
-    }));
-    setTimeout(() => {
-      setShowModal(false);
-      setSuccess(false);
-    }, 2000);
-  };
+  const payMutation = useMutation({
+    mutationFn: (operator: SubscriptionOperator) =>
+      subscriptionService.payGroupSubscription(groupId, operator),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['group-subscription', groupId] });
+      setSuccess(true);
+      setTimeout(() => {
+        setShowModal(false);
+        setSuccess(false);
+      }, 2000);
+    },
+  });
+
+  const handlePay = (operator: SubscriptionOperator) => payMutation.mutate(operator);
 
   return {
     subscription, showModal, setShowModal,
-    loading, success, handlePay,
+    loading: payMutation.isPending, success, handlePay,
   };
 };

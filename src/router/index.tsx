@@ -3,10 +3,10 @@ import { lazy, Suspense } from 'react';
 import AdminLayout from '@/layouts/AdminLayout';
 import AdminProtectedRoute from './AdminProtectedRoute';
 import TutorLayout from '../layouts/TutorLayout';
-import TutorProtectedRoute from './TutorProtectedRoute';
+import RoleProtectedRoute from './RoleProtectedRoute';
 
 import StudentLayout from '../layouts/StudentLayout';
-import StudentProtectedRoute from './StudentProtectedRoute';
+
 
 const HomePage       = lazy(() => import('@/pages/public/HomePage'));
 const LoginPage      = lazy(() => import('@/pages/public/LoginPage'));
@@ -84,7 +84,7 @@ export const AppRouter = () => (
 
       {/* Routes admin */}
       <Route path="/admin/login" element={<AdminLoginPage />} />
-      <Route element={<AdminProtectedRoute />}/>
+      <Route element={<AdminProtectedRoute />}>
         <Route element={<AdminLayout />}>
           <Route path="/admin/dashboard" element={<div><AdminDashboardPage/></div>} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
@@ -94,8 +94,10 @@ export const AppRouter = () => (
             <Route path="/admin/groups"       element={<AdminGroupsPage />} /> 
             <Route path="/admin/subscriptions" element={<AdminSubscriptionsPage />} />
             </Route>
-            <Route element = {<TutorProtectedRoute />} />
-            {/* tutor */}
+            </Route>
+              {/* tutor */}
+            
+            <Route element = {<RoleProtectedRoute allowedRoles={['REPETITEUR']}/>} >
   <Route element={<TutorLayout />}>
     <Route path="/repetiteur/dashboard" element={<TutorDashboardPage />} />
     <Route path="/repetiteur/disponibilites" element={<TutorAvailabilityPage />} />
@@ -110,9 +112,10 @@ export const AppRouter = () => (
   path="/repetiteur/groupes/:groupId/abonnement"
   element={<TutorGroupSubscriptionPage />}
 />
+</Route>
       </Route>
       {/* student */}
-      <Route element={<StudentProtectedRoute />}>
+      <Route element = {<RoleProtectedRoute allowedRoles={['ELEVE','PARENT']}/>} >
   <Route element={<StudentLayout />}>
     <Route path="/eleve/dashboard" element={<StudentDashboardPage />} />
     <Route path="/repetiteurs" element={<SearchTutorPage />} />
@@ -125,6 +128,7 @@ export const AppRouter = () => (
   <Route path='/messagerie' element= {<MessagingPage />} />
   <Route path="/reservation" element={<BookingPage />} />
   </Route>
+  
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
