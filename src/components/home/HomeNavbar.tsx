@@ -5,7 +5,7 @@ import { Menu, X, GraduationCap } from 'lucide-react';
 const NAV_LINKS = [
   { to: '/repetiteurs', label: 'Répétiteurs' },
   { to: '/groupes', label: 'Groupes' },
-  { to: '/tarifs', label: 'Comment ça marche' },
+  { to: '/tarifs', label: 'vue d ensemble' },
   { to: '#avantages', label: 'À propos' },
 ];
 
@@ -29,8 +29,8 @@ const HomeNavbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300
         ${scrolled
-          ? 'bg-navy/95 backdrop-blur-md shadow-lg shadow-black/10 py-3'
-          : 'bg-gradient-to-b from-navy/50 via-navy/10 to-transparent py-5'}`}
+          ? 'bg-navy/95 backdrop-blur-md shadow-lg shadow-black/50 py-3'
+          : 'bg-gradient-to-b from-navy/50 via-navy/50 to-transparent py-5'}`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
@@ -52,7 +52,7 @@ const HomeNavbar = () => {
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `${linkBase} text-white/80 hover:text-white
+                `${linkBase} text-white/90 hover:text-white
                  after:w-full ${isActive ? 'after:scale-x-100 text-white' : 'after:scale-x-0 hover:after:scale-x-100'}`
               }
             >
