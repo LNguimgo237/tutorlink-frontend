@@ -20,6 +20,7 @@ export const AppRouter = () => (
       <Route path="*"         element={<NotFoundPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
+      <Route path="/connexion" element={<ConnexionPage />} />
     </Routes>
   </Suspense>
 );
