@@ -7,7 +7,8 @@ const LoginPage   = lazy(() => import('@/pages/auth/LoginPage'));
 const RegisterPage = lazy(() => import('@/pages/auth/RegisterPage'));
 const SearchPage  = lazy(() => import('@/pages/search/SearchPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
-
+const ForgotPasswordPage = lazy(() => import('@/pages/auth/ForgotPasswordPage'));
+const ResetPasswordPage = lazy(() => import('@/pages/auth/ResetPasswordPage'));
 export const AppRouter = () => (
   <Suspense fallback={<div>Chargement...</div>}>
     <Routes>
@@ -16,6 +17,8 @@ export const AppRouter = () => (
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/search"   element={<SearchPage />} />
       <Route path="*"         element={<NotFoundPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
     </Routes>
   </Suspense>
 );
