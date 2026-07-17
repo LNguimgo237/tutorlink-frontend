@@ -9,6 +9,7 @@ const SearchPage  = lazy(() => import('@/pages/search/SearchPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 const ForgotPasswordPage = lazy(() => import('@/pages/auth/ForgotPasswordPage'));
 const ResetPasswordPage = lazy(() => import('@/pages/auth/ResetPasswordPage'));
+const ConnexionPage = lazy(() => import('@/pages/auth/LoginPage'));
 export const AppRouter = () => (
   <Suspense fallback={<div>Chargement...</div>}>
     <Routes>
