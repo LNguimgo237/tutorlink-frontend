@@ -1,35 +1,35 @@
-// ============================================================
-// FICHIER : src/main.tsx
-// MODIFICATION : Initialisation du thème AVANT le rendu React
-//               pour éviter le "flash" de thème incorrect
-// ============================================================
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-// ✅ AJOUT : Initialise le thème depuis localStorage
-// AVANT que React ne rende quoi que ce soit
-// → évite le flash blanc en mode sombre au rechargement
 (function initTheme() {
   try {
     const stored = localStorage.getItem("tutorlink-theme");
     if (stored) {
       const { state } = JSON.parse(stored);
-      if (state?.isDark) {
-        document.documentElement.classList.add("dark");
-      }
+      if (state?.isDark) document.documentElement.classList.add("dark");
     }
-  } catch {
-    // Ignore les erreurs de parsing
-  }
+  } catch {}
 })();
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-  
+async function prepare() {
+  console.log('VITE_DEMO_MODE=', import.meta.env.VITE_DEMO_MODE);
+  if (import.meta.env.VITE_DEMO_MODE === 'true') {
+    console.log('Demarrage de MSW...');
+    const { worker } = await import('./mocks/browser');
+    await worker.start({ onUnhandledRequest: 'bypass' }); // les routes non-mockées passent normalement
+    console.log('MSW demarre avec succes');
+  }
+}
 
+prepare().catch((err)=> {
+  console.error('prepare() a echoue:', err);
+})
+.then(() => {
+  ReactDOM.createRoot(document.getElementById("root")!).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+});
